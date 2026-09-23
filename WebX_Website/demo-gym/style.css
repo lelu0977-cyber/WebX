@@ -1,0 +1,34 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Be Vietnam Pro', sans-serif; color: #111827; background: #0f172a; line-height: 1.6; }
+.container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+.top-demo-bar { background: #e85d26; color: #fff; padding: 10px 16px; font-size: 0.88rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.top-bar-btn { background: rgba(255,255,255,0.2); color: #fff; text-decoration: none; padding: 4px 12px; border-radius: 999px; font-weight: 600; font-size: 0.82rem; }
+.top-bar-btn.active { background: #fff; color: #e85d26; }
+.header { background: #1e293b; border-bottom: 1px solid #334155; padding: 16px 0; position: sticky; top: 0; z-index: 50; }
+.nav-wrap { display: flex; align-items: center; justify-content: space-between; }
+.logo { font-size: 1.35rem; font-weight: 900; color: #f97316; letter-spacing: -0.02em; }
+.nav a { text-decoration: none; color: #cbd5e1; margin: 0 12px; font-weight: 600; font-size: 0.92rem; }
+.btn-gym { background: #f97316; color: #fff; text-decoration: none; padding: 11px 24px; border-radius: 999px; font-weight: 800; display: inline-block; }
+.btn-gym:hover { background: #ea580c; }
+.btn-gym-sm { background: #334155; color: #fff; text-decoration: none; padding: 10px 18px; border-radius: 999px; font-weight: 700; display: block; text-align: center; margin-top: 18px; }
+.hero { text-align: center; padding: 80px 0 60px 0; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); color: #fff; }
+.tag { background: #f97316; color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.05em; }
+.hero h1 { font-size: 2.6rem; margin: 18px 0; font-weight: 900; }
+.hero p { font-size: 1.15rem; color: #94a3b8; margin-bottom: 26px; max-width: 680px; margin-left: auto; margin-right: auto; }
+.section { padding: 70px 0; color: #fff; }
+.sec-title { text-align: center; margin-bottom: 45px; }
+.sec-title h2 { font-size: 2rem; color: #f97316; margin-bottom: 8px; }
+.sec-title p { color: #94a3b8; }
+.gym-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.gym-card { background: #1e293b; border: 2px solid #334155; border-radius: 18px; padding: 30px 24px; position: relative; }
+.gym-card.featured { border-color: #f97316; background: #26334d; }
+.badge-feat { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #f97316; color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 0.75rem; font-weight: 800; }
+.gym-price { font-size: 2.1rem; font-weight: 900; color: #f97316; margin: 12px 0 6px 0; }
+.gym-ul { list-style: none; margin: 20px 0; border-top: 1px dashed #475569; padding-top: 16px; }
+.gym-ul li { margin-bottom: 10px; color: #cbd5e1; font-size: 0.92rem; }
+.gym-ul li::before { content: '⚡ '; color: #f97316; }
+.footer-gym { text-align: center; padding: 30px 20px; border-top: 1px solid #334155; font-size: 0.86rem; color: #64748b; }
+@media (max-width: 768px) {
+  .gym-grid { grid-template-columns: 1fr; }
+  .nav { display: none; }
+}

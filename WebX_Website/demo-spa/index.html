@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serenity Spa & Clinic — Thư giãn & Tái tạo làn da</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Thanh thông tin mẫu -->
+  <div class="top-demo-bar">
+    <span>💡 Website mẫu của <b>WebX</b> cho tiệm Spa & Salon — Giao trong 2 ngày, bảng giá công khai.</span>
+    <a href="../index.html" class="top-bar-btn">← Quay lại WebX</a>
+    <a href="../thanh-toan.html?prod=spa" class="top-bar-btn active">Đặt làm mẫu này ngay ⚡</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="#" class="logo">🌿 Serenity Spa</a>
+      <nav class="nav">
+        <a href="#services">Dịch vụ & Liệu trình</a>
+        <a href="#about">Về chúng tôi</a>
+        <a href="#booking">Đặt lịch hẹn</a>
+      </nav>
+      <a href="#booking" class="btn-spa">Đặt lịch</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <span class="tag">Trải nghiệm thư giãn chuẩn 5 sao</span>
+      <h1>Nuông chiều làn da & Tìm lại sự cân bằng</h1>
+      <p>Không gian thảo mộc thanh tịnh, kỹ thuật viên giàu kinh nghiệm và dược mỹ phẩm nhập khẩu chính hãng.</p>
+      <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+        <a href="#booking" class="btn-spa">Đặt lịch ngay 🌿</a>
+        <a href="#services" class="top-bar-btn" style="background:#0d9488; color:#fff; padding:10px 22px; font-size:0.95rem;">Xem bảng giá liệu trình ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Danh sách dịch vụ nổi bật -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="sec-title">
+        <h2>Liệu Trình Chăm Sóc Nổi Bật</h2>
+        <p>Bảng giá rõ ràng, minh bạch — Không phát sinh chi phí phụ thu.</p>
+      </div>
+
+      <div class="spa-cards-grid">
+        <!-- Dịch vụ 1 -->
+        <div class="spa-card">
+          <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=75" alt="Gội đầu dưỡng sinh" />
+          <div class="sc-body">
+            <div>
+              <h3>Gội Đầu Dưỡng Sinh Thảo Dược</h3>
+              <p>60 phút • Massage cổ vai gáy, xông đầu thảo dược tươi và ngọc bích thư giãn.</p>
+            </div>
+            <div>
+              <div class="sc-price">199.000đ</div>
+              <button type="button" onclick="selectService('Gội Đầu Dưỡng Sinh Thảo Dược (199.000đ)')" class="btn-spa-sm">Đặt lịch</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dịch vụ 2 -->
+        <div class="spa-card">
+          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=75" alt="Massage body đá nóng" />
+          <div class="sc-body">
+            <div>
+              <h3>Massage Body Đá Nóng Himalaya</h3>
+              <p>75 phút • Giảm đau nhức cơ bắp, đả thông kinh lạc và phục hồi năng lượng sâu.</p>
+            </div>
+            <div>
+              <div class="sc-price">349.000đ</div>
+              <button type="button" onclick="selectService('Massage Body Đá Nóng Himalaya (349.000đ)')" class="btn-spa-sm">Đặt lịch</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dịch vụ 3 -->
+        <div class="spa-card">
+          <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=600&q=75" alt="Chăm sóc da mặt chuyên sâu" />
+          <div class="sc-body">
+            <div>
+              <h3>Chăm Sóc & Điện Di C Căng Bóng</h3>
+              <p>90 phút • Làm sạch sâu đa tầng, hút bã nhờn, điện di tinh chất Vitamin C sáng hồng.</p>
+            </div>
+            <div>
+              <div class="sc-price">450.000đ</div>
+              <button type="button" onclick="selectService('Chăm Sóc & Điện Di C Căng Bóng (450.000đ)')" class="btn-spa-sm">Đặt lịch</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trang Đích & Form Đặt Lịch Hẹn -->
+  <section class="booking-section" id="booking">
+    <div class="container">
+      <div class="booking-wrap">
+        
+        <!-- Cột thông tin giới thiệu -->
+        <div class="booking-info-box">
+          <span class="tag" style="margin-bottom: 12px;">Ưu đãi đặt trước</span>
+          <h3>Trải Nghiệm Dịch Vụ Chuẩn 5 Sao Tại Serenity Spa</h3>
+          <p>Điền thông tin và tình trạng da của bạn bên dưới để chuyên viên chuẩn bị phòng trị liệu riêng biệt và liệu trình phù hợp nhất.</p>
+
+          <ul class="perk-list">
+            <li>
+              <div class="perk-icon">✓</div>
+              <span>Miễn phí soi da 3D & phân tích chuyên sâu</span>
+            </li>
+            <li>
+              <div class="perk-icon">✓</div>
+              <span>Trà thảo mộc dưỡng nhan & bánh ngọt đón tiếp</span>
+            </li>
+            <li>
+              <div class="perk-icon">✓</div>
+              <span>Không gian riêng tư, phòng máy lạnh êm dịu</span>
+            </li>
+            <li>
+              <div class="perk-icon">✓</div>
+              <span>Cam kết 100% dược mỹ phẩm chính hãng</span>
+            </li>
+          </ul>
+
+          <div class="quick-contact-box">
+            <a href="tel:0325477523" class="btn-quick-call">
+              <span>📞</span> Gọi Hotline: 0325 477 523
+            </a>
+            <button type="button" onclick="openZaloQRModal()" class="btn-quick-zalo">
+              <span>💬</span> Chat Zalo Lê Thành Long
+            </button>
+          </div>
+        </div>
+
+        <!-- Cột Form Đặt Lịch -->
+        <div class="booking-form-card">
+          <h3>Đặt Lịch Hẹn Chăm Sóc</h3>
+          <p class="sub">Vui lòng điền thông tin để chúng mình phục vụ bạn chu đáo nhất.</p>
+
+          <form id="spa-booking-form">
+            
+            <!-- Họ tên & SĐT -->
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="spa-name">Họ và tên của bạn *</label>
+                <input type="text" id="spa-name" name="fullname" placeholder="Ví dụ: Chị Lan Anh, Anh Tuấn..." required />
+              </div>
+              <div class="form-group">
+                <label for="spa-phone">Số điện thoại / Zalo *</label>
+                <input type="tel" id="spa-phone" name="phone" placeholder="09xx xxx xxx" required />
+              </div>
+            </div>
+
+            <!-- Gói dịch vụ -->
+            <div class="form-group">
+              <label for="spa-service">Dịch vụ & Liệu trình bạn quan tâm *</label>
+              <select id="spa-service" name="service" required>
+                <option value="Gội Đầu Dưỡng Sinh Thảo Dược (199.000đ)">Gội Đầu Dưỡng Sinh Thảo Dược (199.000đ)</option>
+                <option value="Massage Body Đá Nóng Himalaya (349.000đ)">Massage Body Đá Nóng Himalaya (349.000đ)</option>
+                <option value="Chăm Sóc & Điện Di C Căng Bóng (450.000đ)">Chăm Sóc & Điện Di C Căng Bóng (450.000đ)</option>
+                <option value="Chăm Sóc Da Mụn Chuyên Sâu Bio-Light (399.000đ)">Chăm Sóc Da Mụn Chuyên Sâu Bio-Light (399.000đ)</option>
+                <option value="Tư vấn & Soi da 3D miễn phí">Tư vấn & Soi da 3D miễn phí</option>
+              </select>
+            </div>
+
+            <!-- Tình trạng da -->
+            <div class="form-group">
+              <label for="spa-skin">Tình trạng da hiện tại của bạn *</label>
+              <select id="spa-skin" name="skin_condition" required>
+                <option value="">— Vui lòng chọn tình trạng da —</option>
+                <option value="Da mụn ẩn, mụn viêm, có vết thâm sau mụn">Da mụn ẩn, mụn viêm, có vết thâm sau mụn</option>
+                <option value="Da dầu nhờn, lỗ chân lông to, nhiều mụn cám/đầu đen">Da dầu nhờn, lỗ chân lông to, nhiều mụn cám/đầu đen</option>
+                <option value="Da khô ráp, thiếu ẩm, dễ bong tróc nứt nẻ">Da khô ráp, thiếu ẩm, dễ bong tróc nứt nẻ</option>
+                <option value="Da sạm nám, tàn nhang, da không đều màu xỉn màu">Da sạm nám, tàn nhang, da không đều màu xỉn màu</option>
+                <option value="Da nhạy cảm, mỏng yếu, dễ mẩn đỏ kích ứng">Da nhạy cảm, mỏng yếu, dễ mẩn đỏ kích ứng</option>
+                <option value="Cần thư giãn cổ vai gáy & phục hồi thể chất">Cần thư giãn cổ vai gáy & phục hồi thể chất</option>
+                <option value="Tình trạng khác (sẽ trao đổi chi tiết trong ghi chú)">Tình trạng khác (sẽ trao đổi chi tiết trong ghi chú)</option>
+              </select>
+            </div>
+
+            <!-- Vì sao bạn chọn chúng tôi -->
+            <div class="form-group">
+              <label for="spa-reason">Vì sao bạn chọn chúng tôi? *</label>
+              <select id="spa-reason" name="why_choose_us" required>
+                <option value="">— Hãy cho chúng mình biết lý do nhé —</option>
+                <option value="Được bạn bè, người thân giới thiệu">Được bạn bè, người thân giới thiệu</option>
+                <option value="Tìm thấy trên Google / Google Maps có đánh giá uy tín">Tìm thấy trên Google / Google Maps có đánh giá uy tín</option>
+                <option value="Thấy website thiết kế đẹp, bảng giá rõ ràng minh bạch">Thấy website thiết kế đẹp, bảng giá rõ ràng minh bạch</option>
+                <option value="Xem video / bài viết trên TikTok & Facebook">Xem video / bài viết trên TikTok & Facebook</option>
+                <option value="Vị trí spa gần nhà / tiện đường đi lại">Vị trí spa gần nhà / tiện đường đi lại</option>
+                <option value="Lý do khác">Lý do khác</option>
+              </select>
+            </div>
+
+            <!-- Ngày giờ mong muốn -->
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="spa-date">Ngày dự kiến đến</label>
+                <input type="date" id="spa-date" name="booking_date" />
+              </div>
+              <div class="form-group">
+                <label for="spa-time">Khung giờ mong muốn</label>
+                <select id="spa-time" name="booking_time">
+                  <option value="Sáng (09:00 - 11:30)">Sáng (09:00 - 11:30)</option>
+                  <option value="Trưa (11:30 - 14:00)">Trưa (11:30 - 14:00)</option>
+                  <option value="Chiều (14:00 - 17:30)" selected>Chiều (14:00 - 17:30)</option>
+                  <option value="Tối (17:30 - 20:30)">Tối (17:30 - 20:30)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Ghi chú thêm -->
+            <div class="form-group">
+              <label for="spa-note">Ghi chú thêm về yêu cầu của bạn</label>
+              <textarea id="spa-note" name="note" rows="2" placeholder="Ví dụ: Ưu tiên kỹ thuật viên nữ, da đang peel nhẹ, cần massage kỹ vùng cổ vai..."></textarea>
+            </div>
+
+            <!-- Nút gửi -->
+            <button type="submit" id="btn-spa-submit" class="btn-spa-submit">
+              Xác Nhận Đặt Lịch Ngay 🌿
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-spa" id="about">
+    <div class="container">
+      <p style="margin-bottom: 8px; font-weight: 700; font-size: 1rem;">🌿 Serenity Spa & Clinic — Nơi Vẻ Đẹp Thăng Hoa</p>
+      <p style="color: #64748b; font-size: 0.88rem; margin-bottom: 12px;">Địa chỉ: 188 Nguyễn Trãi, Đống Đa, Hà Nội • Hotline: 0325 477 523</p>
+      <p>© 2026 Serenity Spa & Clinic — Website thiết kế chuẩn chỉnh bởi <a href="../index.html" style="color: #0d9488; font-weight: 700;">WebX</a>.</p>
+    </div>
+  </footer>
+
+  <!-- Nút gọi điện & chat Zalo nổi trực tiếp 1 chạm -->
+  <div class="floating-contact-widget">
+    <!-- Nút Gọi Điện Thoại 1 chạm -->
+    <a href="tel:0325477523" class="floating-btn floating-btn-phone" title="Gọi Hotline 0325 477 523" aria-label="Gọi điện thoại trực tiếp">
+      <div class="floating-pulse"></div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+      </div>
+      <span class="floating-label">📞 Gọi ngay: 0325 477 523</span>
+    </a>
+
+    <!-- Nút Chat Zalo 1 chạm -->
+    <button type="button" class="floating-btn floating-btn-zalo" onclick="openZaloQRModal()" title="Nhắn tin Zalo Lê Thành Long" aria-label="Chat Zalo với Lê Thành Long">
+      <div class="floating-pulse"></div>
+      <div class="icon">
+        <svg viewBox="0 0 48 48" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 4C12.954 4 4 12.059 4 22c0 5.688 2.96 10.748 7.633 14.15L9.5 44l8.281-3.68C20.082 40.75 22.01 41 24 41c11.046 0 20-8.059 20-18S35.046 4 24 4z" fill="#ffffff" fill-opacity="0.25"/>
+          <text x="24" y="29" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle">Zalo</text>
+        </svg>
+      </div>
+      <span class="floating-label">💬 Chat Zalo Lê Thành Long</span>
+    </button>
+  </div>
+
+  <!-- Popup Modal Mã QR Zalo Lê Thành Long -->
+  <div class="zalo-modal-overlay" id="zaloModal" role="dialog" aria-modal="true" aria-labelledby="zaloTitle">
+    <div class="zalo-modal-card">
+      <div class="zalo-modal-header">
+        <button class="zalo-modal-close" onclick="closeZaloQRModal()" aria-label="Đóng">✕</button>
+        <h3 id="zaloTitle">💬 Lê Thành Long</h3>
+        <p>Danh thiếp Zalo cá nhân & Tư vấn trực tiếp</p>
+      </div>
+      <div class="zalo-modal-body">
+        <div class="zalo-modal-qr-wrap">
+          <img src="zalo_qr_le_thanh_long.jpg" alt="Mã QR Danh thiếp Zalo Lê Thành Long" class="zalo-modal-qr-img" />
+        </div>
+        <p class="zalo-modal-instruction">
+          📸 <strong>Mở app Zalo trên điện thoại</strong> → Bấm icon <strong>Quét QR</strong> để kết bạn & nhắn tin tư vấn trực tiếp 1 chạm!
+        </p>
+        <div class="zalo-modal-actions">
+          <a href="https://zalo.me/0325477523" target="_blank" rel="noopener noreferrer" class="btn-zalo-direct">
+            Mở Ứng Dụng Zalo ↗
+          </a>
+          <button type="button" class="btn-zalo-close-alt" onclick="closeZaloQRModal()">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast thông báo -->
+  <div class="spa-toast" id="spaToast"></div>
+
+  <!-- JavaScript xử lý tương tác & gửi form -->
+  <script>
+    // Modal Zalo QR
+    function openZaloQRModal() {
+      const modal = document.getElementById('zaloModal');
+      if (modal) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeZaloQRModal() {
+      const modal = document.getElementById('zaloModal');
+      if (modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.getElementById('zaloModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'zaloModal') {
+        closeZaloQRModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeZaloQRModal();
+      }
+    });
+
+    // Thiết lập ngày mặc định là hôm nay
+    const dateInput = document.getElementById('spa-date');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.value = today;
+      dateInput.min = today;
+    }
+
+    // Chọn dịch vụ từ card và cuộn mượt xuống form
+    function selectService(serviceName) {
+      const select = document.getElementById('spa-service');
+      if (select) {
+        select.value = serviceName;
+      }
+      const bookingSec = document.getElementById('booking');
+      if (bookingSec) {
+        bookingSec.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          document.getElementById('spa-name')?.focus();
+        }, 600);
+      }
+    }
+
+    function showSpaToast(msg) {
+      const t = document.getElementById('spaToast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => {
+        t.classList.remove('show');
+      }, 5000);
+    }
+
+    // Xử lý gửi Form Đặt Lịch
+    const form = document.getElementById('spa-booking-form');
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('spa-name')?.value.trim();
+        const phone = document.getElementById('spa-phone')?.value.trim();
+        const service = document.getElementById('spa-service')?.value;
+        const skin = document.getElementById('spa-skin')?.value;
+        const reason = document.getElementById('spa-reason')?.value;
+        const date = document.getElementById('spa-date')?.value;
+        const time = document.getElementById('spa-time')?.value;
+        const note = document.getElementById('spa-note')?.value.trim();
+        const btn = document.getElementById('btn-spa-submit');
+
+        if (!name || !phone || !skin || !reason) {
+          showSpaToast('⚠️ Vui lòng điền đầy đủ họ tên, số điện thoại, tình trạng da và lý do chọn chúng tôi.');
+          return;
+        }
+
+        const origText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = '⏳ Đang xác nhận đặt lịch...';
+
+        // 1. Lưu trữ lịch hẹn vào bộ nhớ
+        const bookings = JSON.parse(localStorage.getItem('spa_bookings') || '[]');
+        bookings.push({
+          id: Date.now(),
+          name,
+          phone,
+          service,
+          skin,
+          reason,
+          date,
+          time,
+          note,
+          created_at: new Date().toISOString()
+        });
+        localStorage.setItem('spa_bookings', JSON.stringify(bookings));
+
+        // 2. Gửi tự động về Email: longlesinep114@gmail.com
+        try {
+          await fetch('https://formsubmit.co/ajax/longlesinep114@gmail.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              'Họ và tên': name,
+              'Số điện thoại / Zalo': phone,
+              'Liệu trình đăng ký': service,
+              'Tình trạng da': skin,
+              'Vì sao chọn Serenity Spa': reason,
+              'Thời gian hẹn': `${date} (${time})`,
+              'Ghi chú thêm': note || 'Không có',
+              '_subject': `🌿 [Serenity Spa] Lịch hẹn mới từ ${name} (${phone})`,
+              '_template': 'table',
+              '_captcha': 'false'
+            })
+          });
+        } catch (err) {
+          console.log('Booking email notification:', err);
+        }
+
+        btn.disabled = false;
+        btn.textContent = origText;
+        showSpaToast(`✅ Đặt lịch thành công! Cảm ơn bạn ${name}. Serenity Spa sẽ gọi điện/Zalo xác nhận trong 5 phút nhé!`);
+        form.reset();
+        if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
+      });
+    }
+  </script>
+</body>
+</html>
