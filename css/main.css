@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Caveat:wght@600;700&family=Playpen+Sans:wght@500;600;700;800&display=swap');
 
 /* ============================================================
@@ -1491,3 +1491,41 @@ img {
   gap: 10px;
 }
 
+
+
+/* ===== PIN ADMIN MODAL ===== */
+.admin-pin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.admin-pin-modal-overlay.open {
+  display: flex !important;
+}
+
+/* ===== ZALO QR MODAL ===== */
+.zalo-qr-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.zalo-qr-modal-overlay.open {
+  display: flex !important;
+  opacity: 1 !important;
+}
