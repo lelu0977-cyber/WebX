@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cẩm Nang & Kinh Nghiệm Kinh Doanh Quán Nhỏ — WebX</title>
+  <meta name="description" content="Kinh nghiệm mở quán cà phê, tối ưu Google Maps, bí quyết hút khách và hướng dẫn tự chụp hình menu cho hộ kinh doanh." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  
+  <!-- Background Blobs hữu cơ (Hình 3 & 4) -->
+  <div class="bg-blob bg-blob-cyan"></div>
+  <div class="bg-blob bg-blob-peach"></div>
+
+  <!-- ===== Thanh điều hướng NAVBAR ===== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-logo-icon">🚀</span>
+        <span>WebX</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="">Trang chủ</a>
+        <a href="san-pham.html" class="">Mẫu Website</a>
+        <a href="index.html#pricing">Bảng giá</a>
+        <a href="index.html#process">Quy trình</a>
+        <a href="tin-tuc.html" class="active">Cẩm nang</a>
+        <a href="thanh-toan.html" class="" style="color: var(--primary); font-weight: 800;">Thanh toán QR</a>
+        <a href="admin.html" class="" style="color: var(--secondary-dark); font-size: 0.88rem;">Quản trị</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html#contact" class="btn btn-primary btn-nav">Nhận báo giá</a>
+        <button class="nav-toggle" aria-label="Mở menu">☰</button>
+      </div>
+    </div>
+  </header>
+  
+
+  <section style="padding: 50px 0 70px 0;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Góc chia sẻ thực tế</span>
+        <h1 class="section-title">Cẩm Nang Kinh Doanh & Công Nghệ</h1>
+        <p class="section-sub">Những bài học thực chiến rút ra từ việc đồng hành cùng hơn 150+ hộ kinh doanh nhỏ, quán cà phê, tiệm spa và phòng gym.</p>
+      </div>
+
+      <div class="articles-grid" id="news-all-grid">
+        <!-- Render từ data.articles -->
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>🚀 WebX</h4>
+          <p>Dịch vụ thiết kế website tinh gọn trọn gói cho hộ kinh doanh nhỏ, quán ăn, cà phê, spa, phòng gym. Giao nhanh trong 2 ngày, sở hữu trọn đời không phí thuê tháng.</p>
+          <p style="margin-top: 14px; color: var(--primary-border); font-weight: 600;">Hotline / Zalo: 0325 477 523 (Lê Thành Long)</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Liên kết nhanh</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="san-pham.html">Website mẫu theo ngành</a></li>
+            <li><a href="index.html#pricing">Bảng giá trọn gói</a></li>
+            <li><a href="index.html#process">Lộ trình tên lửa</a></li>
+            <li><a href="tin-tuc.html">Cẩm nang kinh doanh</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Website Demo</h5>
+          <ul class="footer-links">
+            <li><a href="demo-nhan-bac/" target="_blank">Nhẫn Bạc — KaT Jewelry</a></li>
+            <li><a href="demo-cafe/" target="_blank">The Morning Cafe</a></li>
+            <li><a href="demo-spa/" target="_blank">Serenity Spa & Clinic</a></li>
+            <li><a href="demo-gym/" target="_blank">IronPulse Fitness & Gym</a></li>
+            <li><a href="thanh-toan.html">Thanh toán VietQR</a></li>
+            <li><a href="admin.html">Trang quản trị</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Hỗ trợ khách hàng</h5>
+          <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 12px;">Cần tư vấn chọn mẫu hoặc báo giá riêng cho quán của bạn? Nhắn Zalo cho em nhé!</p>
+          <a href="https://zaloapp.com/qr/p/1m2koedeqiy8z" target="_blank" class="btn btn-primary btn-sm" style="width: 100%;">💬 Nhắn Zalo ngay</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 WebX — Phong cách Sáng tạo Xào Ý Tưởng. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CHATBOT 24/7 & FLOATING BUTTONS ===== -->
+  <button class="chat-fab" id="chat-fab" aria-label="Mở chat tư vấn">💬</button>
+  
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-label="Tư vấn WebX">
+    <div class="chat-head">
+      <span>🚀 Tư vấn WebX — Lê Thành Long</span>
+      <button id="chat-close" aria-label="Đóng">✕</button>
+    </div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-quick">
+      <button data-q="Giá bao nhiêu?">Giá bao nhiêu?</button>
+      <button data-q="Bao lâu có web?">Bao lâu có web?</button>
+      <button data-q="Có đóng phí hàng tháng không?">Có phí tháng không?</button>
+      <button data-q="Có xem trước được không?">Xem mẫu trước</button>
+    </div>
+    <div class="chat-foot">
+      <input id="chat-input" type="text" placeholder="Nhập câu hỏi của bạn..." />
+      <button id="chat-send">Gửi</button>
+    </div>
+    <a class="chat-cta" href="index.html#contact" id="chat-cta">Điền form để lại số — em gọi lại tư vấn</a>
+  </div>
+
+  <div class="floating-actions">
+    <a href="https://zaloapp.com/qr/p/1m2koedeqiy8z" target="_blank" class="float-btn zalo" aria-label="Chat Zalo">Zalo</a>
+    <a href="tel:+84325477523" class="float-btn" style="background: var(--primary);" aria-label="Gọi điện">📞</a>
+  </div>
+  
+
+  <script src="js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const wrap = document.getElementById('news-all-grid');
+      const articles = window.WEBNHANH_DATA.articles;
+      if (wrap && articles) {
+        wrap.innerHTML = articles.map(a => `
+          <div class="article-card">
+            <div class="article-thumb-wrap">
+              <img src="${a.img}" alt="${a.title}" class="article-thumb" loading="lazy" />
+            </div>
+            <div class="article-body">
+              <div class="article-meta">
+                <span class="article-tag">${a.category}</span>
+                <span>• ${a.date}</span>
+              </div>
+              <h3 class="article-title">${a.title}</h3>
+              <p class="article-excerpt">${a.excerpt}</p>
+              <a href="chi-tiet-tin-tuc.html?slug=${a.slug}" class="article-link">Đọc toàn bộ bài viết →</a>
+            </div>
+          </div>
+        `).join('');
+      }
+    });
+  </script>
+  <script src="js/app.js"></script>
+</body>
+</html>

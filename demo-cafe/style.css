@@ -1,0 +1,36 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Be Vietnam Pro', sans-serif; color: #2e2621; background: #faf7f2; line-height: 1.6; }
+.container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+.top-demo-bar { background: #e85d26; color: #fff; padding: 10px 16px; font-size: 0.88rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.top-bar-btn { background: rgba(255,255,255,0.2); color: #fff; text-decoration: none; padding: 4px 12px; border-radius: 999px; font-weight: 600; font-size: 0.82rem; }
+.top-bar-btn.active { background: #fff; color: #e85d26; }
+.header { background: #fff; border-bottom: 1px solid #e8ded4; padding: 16px 0; position: sticky; top: 0; z-index: 50; }
+.nav-wrap { display: flex; align-items: center; justify-content: space-between; }
+.logo { font-size: 1.35rem; font-weight: 800; color: #b45309; }
+.nav a { text-decoration: none; color: #451a03; margin: 0 12px; font-weight: 600; font-size: 0.92rem; }
+.btn-cafe { background: #b45309; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 999px; font-weight: 700; display: inline-block; }
+.btn-cafe:hover { background: #92400e; }
+.btn-cafe-outline { border: 2px solid #b45309; color: #b45309; text-decoration: none; padding: 8px 18px; border-radius: 999px; font-weight: 700; }
+.hero { text-align: center; padding: 70px 0 50px 0; background: linear-gradient(180deg, #fff 0%, #faf7f2 100%); }
+.hero-inner { max-width: 760px; margin: 0 auto; }
+.tag { background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 999px; font-size: 0.82rem; font-weight: 700; }
+.hero h1 { font-size: 2.5rem; margin: 16px 0; color: #451a03; }
+.hero p { font-size: 1.1rem; color: #78350f; margin-bottom: 24px; }
+.section { padding: 60px 0; }
+.sec-title { text-align: center; margin-bottom: 40px; }
+.sec-title h2 { font-size: 2rem; color: #451a03; margin-bottom: 8px; }
+.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.menu-cat { background: #fff; border: 1.5px solid #e8ded4; border-radius: 16px; padding: 26px; }
+.menu-cat h3 { font-size: 1.25rem; color: #b45309; margin-bottom: 18px; border-bottom: 1px dashed #e8ded4; padding-bottom: 8px; }
+.menu-item { display: flex; align-items: baseline; margin-bottom: 14px; }
+.mi-name { font-weight: 600; font-size: 0.95rem; }
+.mi-dots { flex: 1; border-bottom: 1px dotted #d6cec7; margin: 0 8px; }
+.mi-price { font-weight: 800; color: #b45309; }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.gallery-grid img { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; }
+.contact-box { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; background: #fff; border-radius: 20px; padding: 36px; border: 1.5px solid #e8ded4; }
+.footer-cafe { text-align: center; padding: 30px 20px; border-top: 1px solid #e8ded4; font-size: 0.86rem; color: #78350f; }
+@media (max-width: 768px) {
+  .menu-grid, .gallery-grid, .contact-box { grid-template-columns: 1fr; }
+  .nav { display: none; }
+}

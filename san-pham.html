@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Danh Sách Mẫu Website & Dịch Vụ — WebX</title>
+  <meta name="description" content="Kho mẫu website chuyên nghiệp cho quán cà phê, nhà hàng, tiệm spa, phòng gym, thời trang. Đặt làm giao ngay trong 2 ngày." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    .catalog-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+      background: #fff;
+      padding: 16px 22px;
+      border-radius: var(--radius-lg);
+      border: 1.5px solid var(--border-card);
+      box-shadow: var(--shadow-sm);
+    }
+    .catalog-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .catalog-filter-btn {
+      background: var(--bg-canvas);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-pill);
+      padding: 8px 18px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .catalog-filter-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .catalog-filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(232, 93, 38, 0.25);
+    }
+    .catalog-search-wrap {
+      flex: 1;
+      max-width: 320px;
+    }
+    .catalog-search-input {
+      width: 100%;
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--border-color);
+      font-size: 0.9rem;
+      outline: none;
+      background: var(--bg-canvas);
+    }
+    .catalog-search-input:focus {
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  
+  <!-- Background Blobs hữu cơ (Hình 3 & 4) -->
+  <div class="bg-blob bg-blob-cyan"></div>
+  <div class="bg-blob bg-blob-peach"></div>
+
+  <!-- ===== Thanh điều hướng NAVBAR ===== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-logo-icon">🚀</span>
+        <span>WebX</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="">Trang chủ</a>
+        <a href="san-pham.html" class="active">Mẫu Website</a>
+        <a href="index.html#pricing">Bảng giá</a>
+        <a href="index.html#process">Quy trình</a>
+        <a href="tin-tuc.html" class="">Cẩm nang</a>
+        <a href="thanh-toan.html" class="" style="color: var(--primary); font-weight: 800;">Thanh toán QR</a>
+        <a href="admin.html" class="" style="color: var(--secondary-dark); font-size: 0.88rem;">Quản trị</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html#contact" class="btn btn-primary btn-nav">Nhận báo giá</a>
+        <button class="nav-toggle" aria-label="Mở menu">☰</button>
+      </div>
+    </div>
+  </header>
+  
+
+  <!-- Banner đầu trang -->
+  <section style="padding: 50px 0 30px 0;">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 30px;">
+        <span class="section-tag">Kho mẫu thực chiến</span>
+        <h1 class="section-title">Danh Sách Website Mẫu Cho Quán Nhỏ</h1>
+        <p class="section-sub">Chọn ngay mẫu giao diện chuẩn hóa theo ngành bạn đang kinh doanh. Bàn giao chạy thật trong 2-4 ngày, bảo hành trọn đời.</p>
+      </div>
+
+      <!-- Bộ lọc và tìm kiếm -->
+      <div class="catalog-controls">
+        <div class="catalog-filters">
+          <button class="catalog-filter-btn active" data-cat="all">Tất cả mẫu</button>
+          <button class="catalog-filter-btn" data-cat="jewelry">💍 Trang sức / Phụ kiện</button>
+          <button class="catalog-filter-btn" data-cat="spa">💆 Spa / Làm đẹp</button>
+          <button class="catalog-filter-btn" data-cat="gym">💪 Phòng Gym / Yoga</button>
+        </div>
+        <div class="catalog-search-wrap">
+          <input type="text" id="catalog-search" class="catalog-search-input" placeholder="🔍 Tìm kiếm mẫu website..." />
+        </div>
+      </div>
+
+      <!-- Lưới danh sách sản phẩm -->
+      <div class="demos-grid" id="catalog-grid">
+        <!-- Render tự động từ app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner tư vấn tùy chỉnh -->
+  <section style="padding: 40px 0 70px 0;">
+    <div class="container">
+      <div class="rocket-banner">
+        <div class="rocket-banner-text">
+          <h4>🎨 Bạn có ngành nghề đặc thù hoặc muốn thiết kế theo phong cách riêng?</h4>
+          <p>Nhắn Zalo cho em, em sẽ lên demo nhanh khung website mẫu phù hợp nhất với mô hình của bạn hoàn toàn miễn phí!</p>
+        </div>
+        <a href="https://zaloapp.com/qr/p/1m2koedeqiy8z" target="_blank" class="btn btn-primary btn-lg">Nhắn Zalo tư vấn riêng 💬</a>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>🚀 WebX</h4>
+          <p>Dịch vụ thiết kế website tinh gọn trọn gói cho hộ kinh doanh nhỏ, quán ăn, cà phê, spa, phòng gym. Giao nhanh trong 2 ngày, sở hữu trọn đời không phí thuê tháng.</p>
+          <p style="margin-top: 14px; color: var(--primary-border); font-weight: 600;">Hotline / Zalo: 0325 477 523 (Lê Thành Long)</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Liên kết nhanh</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="san-pham.html">Website mẫu theo ngành</a></li>
+            <li><a href="index.html#pricing">Bảng giá trọn gói</a></li>
+            <li><a href="index.html#process">Lộ trình tên lửa</a></li>
+            <li><a href="tin-tuc.html">Cẩm nang kinh doanh</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Website Demo</h5>
+          <ul class="footer-links">
+            <li><a href="demo-nhan-bac/" target="_blank">Nhẫn Bạc — KaT Jewelry</a></li>
+            <li><a href="demo-cafe/" target="_blank">The Morning Cafe</a></li>
+            <li><a href="demo-spa/" target="_blank">Serenity Spa & Clinic</a></li>
+            <li><a href="demo-gym/" target="_blank">IronPulse Fitness & Gym</a></li>
+            <li><a href="thanh-toan.html">Thanh toán VietQR</a></li>
+            <li><a href="admin.html">Trang quản trị</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Hỗ trợ khách hàng</h5>
+          <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 12px;">Cần tư vấn chọn mẫu hoặc báo giá riêng cho quán của bạn? Nhắn Zalo cho em nhé!</p>
+          <a href="https://zaloapp.com/qr/p/1m2koedeqiy8z" target="_blank" class="btn btn-primary btn-sm" style="width: 100%;">💬 Nhắn Zalo ngay</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 WebX — Phong cách Sáng tạo Xào Ý Tưởng. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CHATBOT 24/7 & FLOATING BUTTONS ===== -->
+  <button class="chat-fab" id="chat-fab" aria-label="Mở chat tư vấn">💬</button>
+  
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-label="Tư vấn WebX">
+    <div class="chat-head">
+      <span>🚀 Tư vấn WebX — Lê Thành Long</span>
+      <button id="chat-close" aria-label="Đóng">✕</button>
+    </div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-quick">
+      <button data-q="Giá bao nhiêu?">Giá bao nhiêu?</button>
+      <button data-q="Bao lâu có web?">Bao lâu có web?</button>
+      <button data-q="Có đóng phí hàng tháng không?">Có phí tháng không?</button>
+      <button data-q="Có xem trước được không?">Xem mẫu trước</button>
+    </div>
+    <div class="chat-foot">
+      <input id="chat-input" type="text" placeholder="Nhập câu hỏi của bạn..." />
+      <button id="chat-send">Gửi</button>
+    </div>
+    <a class="chat-cta" href="index.html#contact" id="chat-cta">Điền form để lại số — em gọi lại tư vấn</a>
+  </div>
+
+  <div class="floating-actions">
+    <a href="https://zaloapp.com/qr/p/1m2koedeqiy8z" target="_blank" class="float-btn zalo" aria-label="Chat Zalo">Zalo</a>
+    <a href="tel:+84325477523" class="float-btn" style="background: var(--primary);" aria-label="Gọi điện">📞</a>
+  </div>
+  
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Quản Trị WebX</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    .admin-wrap {
+      max-width: 1200px;
+      margin: 30px auto 80px auto;
+      padding: 0 20px;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: #fff;
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-card h6 {
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .stat-val {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    .admin-nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--border-card);
+      background: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink);
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 14px rgba(232, 93, 38, 0.3);
+    }
+    .admin-panel {
+      display: none;
+      background: #fff;
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-sm);
+    }
+    .admin-panel.active {
+      display: block;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    table.admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    table.admin-table th, table.admin-table td {
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 10px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    table.admin-table th {
+      background: var(--bg-canvas);
+      font-weight: 700;
+      color: var(--ink);
+    }
+    table.admin-table tr:hover td {
+      background: #fdfaf6;
+    }
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(42, 46, 55, 0.5);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+      padding: 20px;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal-box {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      width: 520px;
+      max-width: 100%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  
+  <!-- Background Blobs hữu cơ (Hình 3 & 4) -->
+  <div class="bg-blob bg-blob-cyan"></div>
+  <div class="bg-blob bg-blob-peach"></div>
+
+  <!-- ===== Thanh điều hướng NAVBAR ===== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-logo-icon">🚀</span>
+        <span>WebX</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="">Trang chủ</a>
+        <a href="san-pham.html" class="">Mẫu Website</a>
+        <a href="index.html#pricing">Bảng giá</a>
+        <a href="index.html#process">Quy trình</a>
+        <a href="tin-tuc.html" class="">Cẩm nang</a>
+        <a href="thanh-toan.html" class="" style="color: var(--primary); font-weight: 800;">Thanh toán QR</a>
+        <a href="admin.html" class="active" style="color: var(--secondary-dark); font-size: 0.88rem;">Quản trị</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html#contact" class="btn btn-primary btn-nav">Nhận báo giá</a>
+        <button class="nav-toggle" aria-label="Mở menu">☰</button>
+      </div>
+    </div>
+  </header>
+  
+
+  <div class="admin-wrap">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;">
+      <div>
+        <span class="badge-pill">Bảng điều khiển quản trị</span>
+        <h1 style="font-size: 2rem; margin-top: 6px; color: var(--ink);">Quản Trị Hệ Thống WebX</h1>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <button class="btn btn-ghost btn-sm" id="btn-reset-data" style="color: #e11d48; border-color: #fecdd3; background: #fff1f2;" title="Xóa dữ liệu tạm và đặt lại danh sách mẫu về mặc định">🔄 Đặt lại mặc định (Reset)</button>
+        <button class="btn btn-ghost btn-sm" id="btn-export-json">💾 Xuất dữ liệu (JSON)</button>
+        <a href="index.html" class="btn btn-primary btn-sm">Xem Website Ngoài ↗</a>
+      </div>
+    </div>
+
+    <!-- Hàng thống kê nhanh -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <h6>Doanh thu đã thu</h6>
+        <div class="stat-val" id="stat-revenue">0đ</div>
+      </div>
+      <div class="stat-card">
+        <h6>Tổng đơn hàng</h6>
+        <div class="stat-val" id="stat-orders">0</div>
+      </div>
+      <div class="stat-card">
+        <h6>Đơn chờ thanh toán</h6>
+        <div class="stat-val" id="stat-pending" style="color: #d97706;">0</div>
+      </div>
+      <div class="stat-card">
+        <h6>Khách hàng để lại số</h6>
+        <div class="stat-val" id="stat-customers" style="color: var(--secondary-dark);">0</div>
+      </div>
+    </div>
+
+    <!-- Tabs điều hướng -->
+    <div class="admin-nav-tabs">
+      <button class="tab-btn active" data-tab="orders">📦 Danh sách đơn hàng</button>
+      <button class="tab-btn" data-tab="customers">👥 Khách hàng tư vấn</button>
+      <button class="tab-btn" data-tab="products">🎨 Mẫu website & Dịch vụ</button>
+    </div>
+
+    <!-- Panel 1: Đơn hàng -->
+    <div class="admin-panel active" id="panel-orders">
+      <div class="panel-head">
+        <h3>Quản lý Đơn hàng & Thanh toán VietQR</h3>
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Mã đơn</th>
+              <th>Khách hàng</th>
+              <th>Gói dịch vụ</th>
+              <th>Số tiền</th>
+              <th>Trạng thái</th>
+              <th>Ngày tạo</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody id="tb-orders"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Panel 2: Khách hàng -->
+    <div class="admin-panel" id="panel-customers">
+      <div class="panel-head">
+        <h3>Danh sách khách hàng để lại thông tin</h3>
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Họ tên</th>
+              <th>Số điện thoại</th>
+              <th>Email</th>
+              <th>Gói quan tâm</th>
+              <th>Ngành nghề</th>
+              <th>Ghi chú</th>
+              <th>Ngày liên hệ</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody id="tb-customers"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Panel 3: Sản phẩm / Dịch vụ -->
+    <div class="admin-panel" id="panel-products">
+      <div class="panel-head">
+        <h3>Danh mục mẫu website đang mở bán</h3>
+        <button class="btn btn-primary btn-sm" id="btn-open-add-product">+ Thêm Mẫu Mới</button>
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Tên mẫu</th>
+              <th>Ngành nghề</th>
+              <th>Giá trọn gói</th>
+              <th>Thời gian</th>
+              <th>Mô tả</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody id="tb-products"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Thêm sản phẩm mới -->
+  <div class="modal-overlay" id="modal-add-product">
+    <div class="modal-box">
+      <h3 style="margin-bottom: 16px;">Thêm Mẫu Website Mới</h3>
+      <form id="form-new-product">
+        <div class="form-field">
+          <label for="np-name">Tên mẫu website *</label>
+          <input type="text" id="np-name" placeholder="VD: The Coffee House Demo" required />
+        </div>
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="np-tag">Ngành nghề</label>
+            <input type="text" id="np-tag" placeholder="VD: Quán Cà phê / Ăn uống" />
+          </div>
+          <div class="form-field">
+            <label for="np-price">Giá tiền (VNĐ)</label>
+            <input type="number" id="np-price" value="1250000" />
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="np-days">Số ngày bàn giao</label>
+            <input type="number" id="np-days" value="2" />
+          </div>
+          <div class="form-field">
+            <label for="np-img">URL ảnh đại diện</label>
+            <input type="url" id="np-img" placeholder="https://..." />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="np-desc">Mô tả ngắn</label>
+          <textarea id="np-desc" rows="2" placeholder="Mô tả mẫu..."></textarea>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-modal-cancel">Hủy</button>
+          <button type="submit" class="btn btn-primary btn-sm">Lưu mẫu mới</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>🚀 WebX</h4>
+          <p>Dịch vụ thiết kế website tinh gọn trọn gói cho hộ kinh doanh nhỏ, quán ăn, cà phê, spa, phòng gym. Giao nhanh trong 2 ngày, sở hữu trọn đời không phí thuê tháng.</p>
+          <p style="margin-top: 14px; color: var(--primary-border); font-weight: 600;">Hotline / Zalo: 0325 477 523 (Lê Thành Long)</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Liên kết nhanh</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="san-pham.html">Website mẫu theo ngành</a></li>
+            <li><a href="index.html#pricing">Bảng giá trọn gói</a></li>
+            <li><a href="index.html#process">Lộ trình tên lửa</a></li>
+            <li><a href="tin-tuc.html">Cẩm nang kinh doanh</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Website Demo</h5>
+          <ul class="footer-links">
+            <li><a href="demo-nhan-bac/" target="_blank">Nhẫn Bạc — KaT Jewelry</a></li>
+            <li><a href="demo-cafe/" target="_blank">The Morning Cafe</a></li>
+            <li><a href="demo-spa/" target="_blank">Serenity Spa & Clinic</a></li>
+            <li><a href="demo-gym/" target="_blank">IronPulse Fitness & Gym</a></li>
+            <li><a href="thanh-toan.html">Thanh toán VietQR</a></li>
+            <li><a href="admin.html">Trang quản trị</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Hỗ trợ khách hàng</h5>
+          <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 12px;">Cần tư vấn chọn mẫu hoặc báo giá riêng cho quán của bạn? Nhắn Zalo cho em nhé!</p>
+          <a href="https://zaloapp.com/qr/p/1m2koedeqiy8z" target="_blank" class="btn btn-primary btn-sm" style="width: 100%;">💬 Nhắn Zalo ngay</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 WebX — Phong cách Sáng tạo Xào Ý Tưởng. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CHATBOT 24/7 & FLOATING BUTTONS ===== -->
+  <button class="chat-fab" id="chat-fab" aria-label="Mở chat tư vấn">💬</button>
+  
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-label="Tư vấn WebX">
+    <div class="chat-head">
+      <span>🚀 Tư vấn WebX — Lê Thành Long</span>
+      <button id="chat-close" aria-label="Đóng">✕</button>
+    </div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-quick">
+      <button data-q="Giá bao nhiêu?">Giá bao nhiêu?</button>
+      <button data-q="Bao lâu có web?">Bao lâu có web?</button>
+      <button data-q="Có đóng phí hàng tháng không?">Có phí tháng không?</button>
+      <button data-q="Có xem trước được không?">Xem mẫu trước</button>
+    </div>
+    <div class="chat-foot">
+      <input id="chat-input" type="text" placeholder="Nhập câu hỏi của bạn..." />
+      <button id="chat-send">Gửi</button>
+    </div>
+    <a class="chat-cta" href="index.html#contact" id="chat-cta">Điền form để lại số — em gọi lại tư vấn</a>
+  </div>
+
+  <div class="floating-actions">
+    <a href="https://zaloapp.com/qr/p/1m2koedeqiy8z" target="_blank" class="float-btn zalo" aria-label="Chat Zalo">Zalo</a>
+    <a href="tel:+84325477523" class="float-btn" style="background: var(--primary);" aria-label="Gọi điện">📞</a>
+  </div>
+  
+
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

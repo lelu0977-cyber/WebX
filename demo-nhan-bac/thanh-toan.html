@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giỏ Hàng & Thanh Toán VietQR | KaT Jewelry</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  
+  <!-- Top Announcement -->
+  <div class="top-announcement">
+    <span>✨ ƯU ĐÃI THÁNG NÀY: <span class="highlight">FREESHIP TOÀN QUỐC</span> ĐƠN TỪ 500K • TẶNG HỘP NHUNG & KHĂN LAU BẠC 925 CAO CẤP</span>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container header-inner">
+      <div style="display:flex; align-items:center; gap:20px;">
+        <a href="../index.html" style="font-size:12px; color:var(--text-muted); background:#f1f5f9; padding:6px 12px; border-radius:20px; font-weight:600;">← WebX</a>
+        <a href="index.html" class="logo-wrap">
+          <span class="logo-text">KaT JEWELRY</span>
+          <span class="logo-tagline">Silver 925 • Midi Ring</span>
+        </a>
+      </div>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link ">Trang Chủ</a></li>
+          <li><a href="nhan-bac-midi-ring.html" class="nav-link ">Nhẫn Bạc Midi Ring <span class="badge-hot">HOT</span></a></li>
+          <li><a href="nhan-bac-midi-ring.html?cat=nhan-dinh-da" class="nav-link ">Nhẫn Đính Đá</a></li>
+          <li><a href="nhan-bac-midi-ring.html?cat=nhan-doi" class="nav-link">Nhẫn Cặp</a></li>
+          <li><a href="huong-dan-do-size.html" class="nav-link ">Đo Size Nhẫn</a></li>
+          <li><a href="tin-tuc.html" class="nav-link ">Cẩm Nang</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="btn-outline-blue header-btn" onclick="KAT_APP.openSizeModal()" style="padding:8px 14px; font-size:13px;">📏 Bảng Size</button>
+        <a href="thanh-toan.html" class="cart-icon-btn" title="Giỏ hàng">
+          🛒
+          <span class="cart-badge" style="display:none;">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <div style="background:var(--primary-soft); border-bottom:1px solid var(--silver-border); padding:24px 0;">
+    <div class="container">
+      <h1 style="font-family:var(--font-serif); font-size:28px; color:var(--primary);">🛒 Giỏ Hàng & Đặt Hàng Trực Tuyến</h1>
+      <p style="color:var(--text-muted); font-size:14px;">Xác nhận đơn hàng và thanh toán tiện lợi qua mã VietQR Napas 24/7 hoặc COD.</p>
+    </div>
+  </div>
+
+  <section class="container">
+    <div class="checkout-grid">
+      <!-- Left: Form thông tin & Giỏ hàng -->
+      <div>
+        <div class="checkout-box" style="margin-bottom:24px;">
+          <h3 class="checkout-box-title">1. Danh Sách Sản Phẩm Trong Giỏ</h3>
+          <div id="checkoutCartList"></div>
+        </div>
+
+        <div class="checkout-box">
+          <h3 class="checkout-box-title">2. Thông Tin Người Nhận Hàng</h3>
+          <form id="orderForm" onsubmit="event.preventDefault(); handleCheckoutSubmit();">
+            <div class="form-group">
+              <label class="form-label">Họ và tên quý khách *</label>
+              <input type="text" id="custName" class="form-control" placeholder="Ví dụ: Nguyễn Thùy Linh" required />
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+              <div class="form-group">
+                <label class="form-label">Số điện thoại *</label>
+                <input type="tel" id="custPhone" class="form-control" placeholder="Ví dụ: 0912 345 678" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tỉnh / Thành phố *</label>
+                <select id="custCity" class="form-control" required>
+                  <option value="hcm">TP. Hồ Chí Minh</option>
+                  <option value="hn">Hà Nội</option>
+                  <option value="dn">Đà Nẵng</option>
+                  <option value="other">Tỉnh thành khác</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Địa chỉ nhận hàng chi tiết *</label>
+              <input type="text" id="custAddress" class="form-control" placeholder="Số nhà, tên đường, phường/xã, quận/huyện" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Ghi chú đơn hàng (Yêu cầu khắc tên, gói quà...)</label>
+              <textarea id="custNote" class="form-control" rows="2" placeholder="Ví dụ: Nhờ KaT khắc chữ 'Love' mặt trong nhẫn giúp mình nhé..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary-blue" style="width:100%; padding:14px; font-size:16px; font-weight:700; border-radius:10px; margin-top:10px;">
+              🛍️ XÁC NHẬN ĐẶT HÀNG NGAY
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Right: VietQR & Summary -->
+      <div id="checkoutSummaryBox">
+        <div class="checkout-box" style="position:sticky; top:100px;">
+          <h3 class="checkout-box-title">3. Thanh Toán Quét Mã VietQR (Napas 24/7)</h3>
+          
+          <div style="display:flex; justify-content:space-between; font-size:14.5px; margin-bottom:10px;">
+            <span style="color:#64748b;">Tạm tính sản phẩm:</span>
+            <strong id="checkoutSubtotal" style="color:var(--dark-navy);">0₫</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:14.5px; margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid #f1f5f9;">
+            <span style="color:#64748b;">Phí vận chuyển:</span>
+            <strong id="checkoutShipping" style="color:#16a34a;">Miễn phí</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:18px; font-weight:800; color:var(--primary); margin-bottom:20px;">
+            <span>TỔNG CỘNG:</span>
+            <span id="checkoutTotal">0₫</span>
+          </div>
+
+          <!-- VietQR Box -->
+          <div class="qr-box-wrap">
+            <div style="font-size:12.5px; font-weight:700; color:var(--primary); text-transform:uppercase; margin-bottom:8px; letter-spacing:0.5px;">
+              Quét Mã Để Chuyển Khoản Nhanh
+            </div>
+            <img id="vietQrImage" class="qr-img" src="../assets/qr_techcombank.jpg" alt="Mã VietQR Techcombank" />
+            <div style="font-size:13px; color:#334155; line-height:1.7;">
+              Ngân hàng: <strong>Techcombank</strong><br/>
+              Số tài khoản: <strong id="qrAccNo" style="color:var(--primary);">1104 2006 01</strong><br/>
+              Chủ tài khoản: <strong id="qrAccName">LE THANH LONG</strong><br/>
+              Nội dung chuyển khoản: <strong id="qrMemoText" style="color:#e85d26; background:#fff3ec; padding:2px 6px; border-radius:4px;">KAT999</strong>
+            </div>
+          </div>
+
+          <div style="font-size:12px; color:var(--text-muted); text-align:center; margin-top:14px;">
+            🔒 Thanh toán an toàn và bảo mật 100%. Đơn hàng được xử lý ngay sau khi hệ thống ghi nhận chuyển khoản.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo-wrap" style="margin-bottom:16px;">
+            <span class="logo-text" style="color:#ffffff; font-size:24px;">KaT JEWELRY</span>
+            <span class="logo-tagline" style="color:#f1d582;">Design & Made to Order</span>
+          </div>
+          <p style="font-size:13.5px; line-height:1.7; color:#94a3b8; margin-bottom:16px;">
+            Thương hiệu trang sức bạc thủ công 925 hàng đầu Việt Nam. Tôn vinh vẻ đẹp ngón tay phái đẹp với những thiết kế Midi Ring tinh xảo, thanh lịch và trường tồn với thời gian.
+          </p>
+          <div style="font-size:13px; color:#cbd5e1;">
+            📍 <strong>Hotline:</strong> 0977 759 255 (Zalo/Viber)<br/>
+            ✉️ <strong>Email:</strong> cskh@katjewelry.vn
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">DANH MỤC TRANG SỨC</h4>
+          <ul class="footer-links" style="font-size:13.5px;">
+            <li><a href="nhan-bac-midi-ring.html">Nhẫn Bạc Midi Ring</a></li>
+            <li><a href="nhan-bac-midi-ring.html?cat=nhan-dinh-da">Nhẫn Bạc Đính Đá CZ</a></li>
+            <li><a href="nhan-bac-midi-ring.html?cat=nhan-hoa-la">Nhẫn Bạc Hoa Lá & Xà Cừ</a></li>
+            <li><a href="nhan-bac-midi-ring.html?cat=nhan-doi">Nhẫn Cặp Bạc Khắc Tên</a></li>
+            <li><a href="nhan-bac-midi-ring.html?cat=day-chuyen">Dây Chuyền Bạc 925</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">CHÍNH SÁCH & HỖ TRỢ</h4>
+          <ul class="footer-links" style="font-size:13.5px;">
+            <li><a href="huong-dan-do-size.html">Hướng dẫn đo size nhẫn</a></li>
+            <li><a href="javascript:void(0)" onclick="KAT_APP.openSizeModal()">Tra cứu bảng size tự động</a></li>
+            <li><a href="tin-tuc.html">Bảo hành đánh bóng trọn đời</a></li>
+            <li><a href="tin-tuc.html">Chính sách đổi trả trong 7 ngày</a></li>
+            <li><a href="thanh-toan.html">Phương thức thanh toán VietQR</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">HỆ THỐNG CỬA HÀNG</h4>
+          <div style="font-size:13px; line-height:1.7; color:#cbd5e1;">
+            <p>🏙️ <strong>TP.HCM:</strong> 442 Hai Bà Trưng, Q.1 • 45 Bà Hom, Q.6 • 138 Võ Văn Ngân, Thủ Đức</p>
+            <p style="margin-top:8px;">🏛️ <strong>Hà Nội:</strong> 9 Xuân Thủy, Cầu Giấy</p>
+            <p style="margin-top:8px;">🏖️ <strong>Đà Nẵng:</strong> 230 Lê Duẩn, Thanh Khê</p>
+          </div>
+          <div style="margin-top:16px;">
+            <a href="thanh-toan.html" class="btn-primary-blue" style="font-size:12px; padding:8px 16px; border-radius:20px; display:inline-block;">⚡ Mua Online Giao Nhanh 2h</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 KaT Jewelry Clone Demo. Bản quyền thiết kế phong cách Xanh Dương Hoàng Gia & Nét vẽ thanh lịch.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="js/jewelry-data.js"></script>
+  <script src="js/jewelry-app.js"></script>
+</body>
+</html>
