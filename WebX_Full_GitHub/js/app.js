@@ -140,6 +140,7 @@
     initQuoteForm();
     initChatbot();
     initZaloQRModal();
+    initAdminModeSecurity();
 
     // Trang Sản Phẩm
     if ($('#catalog-grid')) {
@@ -643,6 +644,77 @@
   }
 
   /* ---------- POPUP HIỂN THỊ MÃ QR ZALO (LÊ THÀNH LONG) ---------- */
+  
+  /* ---------- BẢO MẬT & ẨN HIỆN NÚT QUẢN TRỊ (ADMIN MODE) ---------- */
+  function initAdminModeSecurity() {
+    // 1. Kiểm tra tham số bí mật: ?admin=1 hoặc ?key=1104 hoặc #admin
+    try {
+      var urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('admin') === '1' || urlParams.get('key') === '1104' || window.location.hash === '#admin') {
+        localStorage.setItem('webx_is_admin', 'true');
+        if (window.showToast) window.showToast('👑 Đã kích hoạt Chế độ Quản trị WebX!');
+      }
+    } catch(e) {}
+
+    // 2. Ẩn/Hiện nút Quản trị trên Menu và Footer
+    function updateAdminVisibility() {
+      var isAdmin = localStorage.getItem('webx_is_admin') === 'true';
+      var els = document.querySelectorAll('.admin-only-link, a[href*="admin.html"]');
+      for (var i = 0; i < els.length; i++) {
+        if (isAdmin) {
+          els[i].style.removeProperty('display');
+          els[i].classList.remove('d-none');
+        } else {
+          els[i].style.setProperty('display', 'none', 'important');
+        }
+      }
+    }
+
+    updateAdminVisibility();
+
+    // 3. Phím tắt bí mật: Ctrl + Shift + A
+    document.addEventListener('keydown', function (e) {
+      if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        var pin = prompt('🔐 Vui lòng nhập mã PIN Quản trị WebX:');
+        if (pin === '1104' || pin === 'long114' || pin === 'admin123') {
+          localStorage.setItem('webx_is_admin', 'true');
+          updateAdminVisibility();
+          if (window.showToast) window.showToast('✅ Mở khóa Quản trị thành công!');
+          window.location.href = 'admin.html';
+        } else if (pin !== null) {
+          alert('❌ Mã PIN không chính xác!');
+        }
+      }
+    });
+
+    // 4. Nhấp 3 lần vào Logo để mở khóa
+    var logoClicks = 0;
+    var logoTimer = null;
+    var brandLogos = document.querySelectorAll('.nav-brand');
+    for (var j = 0; j < brandLogos.length; j++) {
+      brandLogos[j].addEventListener('click', function (e) {
+        logoClicks++;
+        clearTimeout(logoTimer);
+        logoTimer = setTimeout(function () { logoClicks = 0; }, 1200);
+
+        if (logoClicks >= 3) {
+          logoClicks = 0;
+          e.preventDefault();
+          var pin = prompt('🔐 Nhập mã PIN Quản trị WebX:');
+          if (pin === '1104' || pin === 'long114' || pin === 'admin123') {
+            localStorage.setItem('webx_is_admin', 'true');
+            updateAdminVisibility();
+            if (window.showToast) window.showToast('✅ Mở khóa Quản trị thành công!');
+            window.location.href = 'admin.html';
+          } else if (pin !== null) {
+            alert('❌ Mã PIN không chính xác!');
+          }
+        }
+      });
+    }
+  }
+
   function initZaloQRModal() {
     if (!$('#zalo-qr-modal')) {
       const modalDiv = document.createElement('div');
@@ -711,4 +783,5 @@
   }
 
 })();
+
 

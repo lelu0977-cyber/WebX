@@ -1,10 +1,20 @@
-/* ============================================================
+﻿/* ============================================================
    WebX — admin.js
    Bảng điều khiển quản trị: Sản phẩm, Khách hàng, Đơn hàng
    ============================================================ */
 
 (function () {
   'use strict';
+  // Kiểm tra quyền Admin
+  if (localStorage.getItem('webx_is_admin') !== 'true') {
+    var pin = prompt('🔐 Trang quản trị bảo mật! Vui lòng nhập mã PIN Quản trị:');
+    if (pin === '1104' || pin === 'long114' || pin === 'admin123') {
+      localStorage.setItem('webx_is_admin', 'true');
+    } else {
+      alert('❌ Bạn không có quyền truy cập trang này!');
+      window.location.href = 'index.html';
+    }
+  }
 
   const data = window.WEBNHANH_DATA;
   if (!data) return;
@@ -265,3 +275,4 @@
   }
 
 })();
+
