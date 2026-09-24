@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chi Tiết Mẫu Website — WebX</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    .product-detail-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      margin-top: 30px;
+      align-items: start;
+    }
+    .product-gallery {
+      background: #fff;
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .product-main-img-wrap {
+      aspect-ratio: 16/10;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 12px;
+      background: var(--bg-alt);
+    }
+    .product-main-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .product-gallery-thumbs {
+      display: flex;
+      gap: 10px;
+    }
+    .gallery-thumb {
+      width: 90px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: all 0.2s ease;
+    }
+    .gallery-thumb:hover, .gallery-thumb.active {
+      border-color: var(--primary);
+      opacity: 1;
+    }
+    .product-info-panel {
+      background: #fff;
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .spec-badge {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--secondary-dark);
+      background: var(--secondary-light);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 12px;
+    }
+    .product-price-box {
+      margin: 18px 0;
+      padding: 16px;
+      background: var(--primary-light);
+      border: 1.5px dashed var(--primary-border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .prod-big-price {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    .prod-features-ul {
+      list-style: none;
+      margin: 20px 0;
+    }
+    .prod-features-ul li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+    .prod-features-ul li::before {
+      content: '✓';
+      color: var(--primary);
+      font-weight: 900;
+    }
+    @media (max-width: 860px) {
+      .product-detail-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  
+  <!-- Background Blobs hữu cơ (Hình 3 & 4) -->
+  <div class="bg-blob bg-blob-cyan"></div>
+  <div class="bg-blob bg-blob-peach"></div>
+
+  <!-- ===== Thanh điều hướng NAVBAR ===== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-logo-icon">🚀</span>
+        <span>WebX</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="">Trang chủ</a>
+        <a href="san-pham.html" class="active">Mẫu Website</a>
+        <a href="index.html#pricing">Bảng giá</a>
+        <a href="index.html#process">Quy trình</a>
+        <a href="tin-tuc.html" class="">Cẩm nang</a>
+        <a href="thanh-toan.html" class="" style="color: var(--primary); font-weight: 800;">Thanh toán QR</a>
+        <a href="admin.html" class="" style="color: var(--secondary-dark); font-size: 0.88rem;">Quản trị</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html#contact" class="btn btn-primary btn-nav">Nhận báo giá</a>
+        <button class="nav-toggle" aria-label="Mở menu">☰</button>
+      </div>
+    </div>
+  </header>
+  
+
+  <div class="container" style="padding-top: 30px; padding-bottom: 70px;" id="product-detail-view">
+    <!-- Breadcrumb -->
+    <div style="font-size: 0.88rem; color: var(--ink-muted); margin-bottom: 16px;">
+      <a href="index.html">Trang chủ</a> / <a href="san-pham.html">Website mẫu</a> / <span id="prod-title-crumb">Chi tiết mẫu</span>
+    </div>
+
+    <div class="product-detail-layout">
+      <!-- Cột trái: Gallery ảnh -->
+      <div class="product-gallery">
+        <div class="product-main-img-wrap">
+          <img id="prod-main-img" class="product-main-img" src="" alt="Website preview" />
+        </div>
+        <div class="product-gallery-thumbs" id="prod-gallery-thumbs"></div>
+      </div>
+
+      <!-- Cột phải: Thông tin & Đặt làm -->
+      <div class="product-info-panel">
+        <span class="spec-badge" id="prod-badge"></span>
+        <h1 id="prod-title" style="font-size: 2.1rem; margin-bottom: 8px; color: var(--ink);"></h1>
+        <p style="color: var(--primary); font-weight: 700; font-size: 0.95rem;" id="prod-tag"></p>
+
+        <div class="product-price-box">
+          <span class="prod-big-price" id="prod-price"></span>
+          <span style="font-size: 0.88rem; color: var(--ink-muted);">Trọn gói • Không phí duy trì tháng</span>
+        </div>
+
+        <p id="prod-desc" style="color: var(--ink-secondary); line-height: 1.65; margin-bottom: 16px;"></p>
+        
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--ink); margin-bottom: 8px;">
+          ⏱ Thời gian hoàn thành: <span id="prod-time" style="color: var(--secondary-dark);"></span>
+        </div>
+
+        <h4 style="font-size: 1.05rem; margin-top: 20px; color: var(--ink);">Các tính năng tích hợp sẵn:</h4>
+        <ul class="prod-features-ul" id="prod-features-list"></ul>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px;">
+          <a id="prod-demo-link" href="" target="_blank" class="btn btn-ghost btn-lg" style="flex: 1;">
+            Xem Demo Trực Tiếp ↗
+          </a>
+          <a id="prod-order-link" href="" class="btn btn-primary btn-lg" style="flex: 1.2;">
+            Đặt làm mẫu này ngay ⚡
+          </a>
+        </div>
+
+        <p style="font-size: 0.82rem; color: var(--ink-muted); text-align: center; margin-top: 14px;">
+          🔒 Được kiểm tra website trên điện thoại trước khi thanh toán phần còn lại.
+        </p>
+      </div>
+    </div>
+
+    <!-- Mẫu website liên quan -->
+    <div style="margin-top: 70px;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 24px; color: var(--ink);">Các mẫu website tương tự bạn có thể thích</h3>
+      <div class="demos-grid" id="related-products-grid"></div>
+    </div>
+  </div>
+
+  
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>🚀 WebX</h4>
+          <p>Dịch vụ thiết kế website tinh gọn trọn gói cho hộ kinh doanh nhỏ, quán ăn, cà phê, spa, phòng gym. Giao nhanh trong 2 ngày, sở hữu trọn đời không phí thuê tháng.</p>
+          <p style="margin-top: 14px; color: var(--primary-border); font-weight: 600;">Hotline / Zalo: 0325 477 523 (Lê Thành Long)</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Liên kết nhanh</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="san-pham.html">Website mẫu theo ngành</a></li>
+            <li><a href="index.html#pricing">Bảng giá trọn gói</a></li>
+            <li><a href="index.html#process">Lộ trình tên lửa</a></li>
+            <li><a href="tin-tuc.html">Cẩm nang kinh doanh</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Website Demo</h5>
+          <ul class="footer-links">
+            <li><a href="demo-nhan-bac/" target="_blank">Nhẫn Bạc — KaT Jewelry</a></li>
+            <li><a href="demo-cafe/" target="_blank">The Morning Cafe</a></li>
+            <li><a href="demo-spa/" target="_blank">Serenity Spa & Clinic</a></li>
+            <li><a href="demo-gym/" target="_blank">IronPulse Fitness & Gym</a></li>
+            <li><a href="thanh-toan.html">Thanh toán VietQR</a></li>
+            <li><a href="admin.html">Trang quản trị</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Hỗ trợ khách hàng</h5>
+          <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 12px;">Cần tư vấn chọn mẫu hoặc báo giá riêng cho quán của bạn? Nhắn Zalo cho em nhé!</p>
+          <a href="https://zaloapp.com/qr/p/1m2koedeqiy8z" target="_blank" class="btn btn-primary btn-sm" style="width: 100%;">💬 Nhắn Zalo ngay</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 WebX — Phong cách Sáng tạo Xào Ý Tưởng. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CHATBOT 24/7 & FLOATING BUTTONS ===== -->
+  <button class="chat-fab" id="chat-fab" aria-label="Mở chat tư vấn">💬</button>
+  
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-label="Tư vấn WebX">
+    <div class="chat-head">
+      <span>🚀 Tư vấn WebX — Lê Thành Long</span>
+      <button id="chat-close" aria-label="Đóng">✕</button>
+    </div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-quick">
+      <button data-q="Giá bao nhiêu?">Giá bao nhiêu?</button>
+      <button data-q="Bao lâu có web?">Bao lâu có web?</button>
+      <button data-q="Có đóng phí hàng tháng không?">Có phí tháng không?</button>
+      <button data-q="Có xem trước được không?">Xem mẫu trước</button>
+    </div>
+    <div class="chat-foot">
+      <input id="chat-input" type="text" placeholder="Nhập câu hỏi của bạn..." />
+      <button id="chat-send">Gửi</button>
+    </div>
+    <a class="chat-cta" href="index.html#contact" id="chat-cta">Điền form để lại số — em gọi lại tư vấn</a>
+  </div>
+
+  <div class="floating-actions">
+    <a href="https://zaloapp.com/qr/p/1m2koedeqiy8z" target="_blank" class="float-btn zalo" aria-label="Chat Zalo">Zalo</a>
+    <a href="tel:+84325477523" class="float-btn" style="background: var(--primary);" aria-label="Gọi điện">📞</a>
+  </div>
+  
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

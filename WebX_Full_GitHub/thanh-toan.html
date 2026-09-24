@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanh Toán Trực Tuyến & Nhận Mã VietQR — WebX</title>
+  <meta name="description" content="Trang thanh toán tự động qua mã VietQR Napas 24/7 của WebX. Quét mã QR chuyển khoản, đơn hàng tự động kích hoạt." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    .pay-wrap {
+      max-width: 680px;
+      margin: 40px auto 80px auto;
+      padding: 0 20px;
+    }
+    .pay-card {
+      background: #fff;
+      border: 2px solid var(--primary);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: 0 12px 36px rgba(232, 93, 38, 0.12);
+    }
+    .pay-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .pay-header h1 {
+      font-size: 1.85rem;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .pay-header p {
+      color: var(--ink-secondary);
+      font-size: 0.95rem;
+    }
+    .qr-result-box {
+      margin-top: 26px;
+      padding: 24px;
+      border-radius: var(--radius-md);
+      background: #fdfaf6;
+      border: 2px dashed var(--primary-border);
+      display: none;
+      text-align: center;
+      animation: chatOpen 0.3s ease;
+    }
+    .qr-image {
+      width: 270px;
+      height: 270px;
+      margin: 16px auto;
+      display: block;
+      border-radius: 12px;
+      border: 2px solid #e5e7eb;
+      background: #fff;
+      padding: 8px;
+    }
+    .qr-meta-row {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+    .qr-meta-row b {
+      color: var(--primary);
+    }
+    .success-box {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: #dcfce7;
+      border: 1.5px solid #86efac;
+      color: #166534;
+      display: none;
+      text-align: left;
+    }
+    .err-msg {
+      color: #dc2626;
+      font-size: 0.88rem;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <!-- Background Blobs hữu cơ (Hình 3 & 4) -->
+  <div class="bg-blob bg-blob-cyan"></div>
+  <div class="bg-blob bg-blob-peach"></div>
+
+  <!-- ===== Thanh điều hướng NAVBAR ===== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-logo-icon">🚀</span>
+        <span>WebX</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="">Trang chủ</a>
+        <a href="san-pham.html" class="">Mẫu Website</a>
+        <a href="index.html#pricing">Bảng giá</a>
+        <a href="index.html#process">Quy trình</a>
+        <a href="tin-tuc.html" class="">Cẩm nang</a>
+        <a href="thanh-toan.html" class="active" style="color: var(--primary); font-weight: 800;">Thanh toán QR</a>
+        <a href="admin.html" class="" style="color: var(--secondary-dark); font-size: 0.88rem;">Quản trị</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html#contact" class="btn btn-primary btn-nav">Nhận báo giá</a>
+        <button class="nav-toggle" aria-label="Mở menu">☰</button>
+      </div>
+    </div>
+  </header>
+  
+
+  <div class="pay-wrap">
+    <div class="pay-card">
+      <div class="pay-header">
+        <span class="badge-pill" style="margin-bottom: 10px;">⚡ Cổng thanh toán Napas 24/7</span>
+        <h1>Thanh Toán Đơn Hàng — WebX</h1>
+        <p>Điền thông tin bên dưới, tạo mã VietQR và quét mã chuyển khoản. Hệ thống tự động ghi nhận ngay khi tiền vào tài khoản.</p>
+      </div>
+
+      <form id="pay-form" novalidate>
+        <div class="form-field">
+          <label for="f-name">Họ và tên của bạn *</label>
+          <input type="text" id="f-name" placeholder="Ví dụ: Nguyễn Văn Tuấn" required />
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="f-phone">Số điện thoại *</label>
+            <input type="tel" id="f-phone" placeholder="0901234567" required />
+          </div>
+          <div class="form-field">
+            <label for="f-email">Email nhận xác nhận đơn</label>
+            <input type="email" id="f-email" placeholder="tuan@gmail.com" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="f-prod">Chọn gói dịch vụ / mẫu website *</label>
+          <select id="f-prod" style="font-weight: 600;"></select>
+        </div>
+
+        <div class="form-field">
+          <label for="f-note">Tên quán / Ghi chú yêu cầu</label>
+          <input type="text" id="f-note" placeholder="Ví dụ: The Morning Cafe - Quận 1" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 12px;">
+          Tạo Đơn Hàng & Lấy Mã VietQR ⚡
+        </button>
+        <div id="err" class="err-msg"></div>
+      </form>
+
+      <!-- Khung hiển thị QR code sau khi tạo đơn -->
+      <div class="qr-result-box" id="qr-box">
+        <div class="qr-meta-row">
+          Mã đơn: <b id="o-code" style="font-family: monospace; font-size: 1.25rem;"></b> • Số tiền: <b id="o-amount"></b>
+        </div>
+
+        <img class="qr-image" id="qr-img" alt="Mã VietQR chuyển khoản" />
+
+        <div class="qr-meta-row" style="font-size: 0.95rem; color: var(--ink-secondary);">
+          Nội dung chuyển khoản bắt buộc: <b id="o-content" style="color: var(--primary);"></b>
+        </div>
+
+        <div id="bank-info"></div>
+
+        <div style="margin-top: 20px;">
+          <button type="button" class="btn btn-primary" id="btn-paid" style="width: 100%;">
+            Tôi đã quét mã & chuyển khoản xong ✓
+          </button>
+        </div>
+
+        <!-- Khung báo thành công -->
+        <div class="success-box" id="ok-box">
+          <p style="font-weight: 700; font-size: 1.05rem; margin-bottom: 6px;">🎉 Cảm ơn anh/chị!</p>
+          <p>Hệ thống đã ghi nhận giao dịch thành công. Em Lê Thành Long sẽ liên hệ lại qua số điện thoại để tiếp nhận nội dung menu và hình ảnh của quán ngay trong ngày hôm nay.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; padding-top: 18px; border-top: 1px dashed var(--border-color); font-size: 0.84rem; color: var(--ink-muted); text-align: center;">
+        🛡 Mọi thắc mắc về thanh toán, vui lòng liên hệ hotline/Zalo: <b>0325 477 523</b> (Lê Thành Long).
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>🚀 WebX</h4>
+          <p>Dịch vụ thiết kế website tinh gọn trọn gói cho hộ kinh doanh nhỏ, quán ăn, cà phê, spa, phòng gym. Giao nhanh trong 2 ngày, sở hữu trọn đời không phí thuê tháng.</p>
+          <p style="margin-top: 14px; color: var(--primary-border); font-weight: 600;">Hotline / Zalo: 0325 477 523 (Lê Thành Long)</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Liên kết nhanh</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="san-pham.html">Website mẫu theo ngành</a></li>
+            <li><a href="index.html#pricing">Bảng giá trọn gói</a></li>
+            <li><a href="index.html#process">Lộ trình tên lửa</a></li>
+            <li><a href="tin-tuc.html">Cẩm nang kinh doanh</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Website Demo</h5>
+          <ul class="footer-links">
+            <li><a href="demo-nhan-bac/" target="_blank">Nhẫn Bạc — KaT Jewelry</a></li>
+            <li><a href="demo-cafe/" target="_blank">The Morning Cafe</a></li>
+            <li><a href="demo-spa/" target="_blank">Serenity Spa & Clinic</a></li>
+            <li><a href="demo-gym/" target="_blank">IronPulse Fitness & Gym</a></li>
+            <li><a href="thanh-toan.html">Thanh toán VietQR</a></li>
+            <li><a href="admin.html">Trang quản trị</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Hỗ trợ khách hàng</h5>
+          <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 12px;">Cần tư vấn chọn mẫu hoặc báo giá riêng cho quán của bạn? Nhắn Zalo cho em nhé!</p>
+          <a href="https://zaloapp.com/qr/p/1m2koedeqiy8z" target="_blank" class="btn btn-primary btn-sm" style="width: 100%;">💬 Nhắn Zalo ngay</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 WebX — Phong cách Sáng tạo Xào Ý Tưởng. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CHATBOT 24/7 & FLOATING BUTTONS ===== -->
+  <button class="chat-fab" id="chat-fab" aria-label="Mở chat tư vấn">💬</button>
+  
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-label="Tư vấn WebX">
+    <div class="chat-head">
+      <span>🚀 Tư vấn WebX — Lê Thành Long</span>
+      <button id="chat-close" aria-label="Đóng">✕</button>
+    </div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-quick">
+      <button data-q="Giá bao nhiêu?">Giá bao nhiêu?</button>
+      <button data-q="Bao lâu có web?">Bao lâu có web?</button>
+      <button data-q="Có đóng phí hàng tháng không?">Có phí tháng không?</button>
+      <button data-q="Có xem trước được không?">Xem mẫu trước</button>
+    </div>
+    <div class="chat-foot">
+      <input id="chat-input" type="text" placeholder="Nhập câu hỏi của bạn..." />
+      <button id="chat-send">Gửi</button>
+    </div>
+    <a class="chat-cta" href="index.html#contact" id="chat-cta">Điền form để lại số — em gọi lại tư vấn</a>
+  </div>
+
+  <div class="floating-actions">
+    <a href="https://zaloapp.com/qr/p/1m2koedeqiy8z" target="_blank" class="float-btn zalo" aria-label="Chat Zalo">Zalo</a>
+    <a href="tel:+84325477523" class="float-btn" style="background: var(--primary);" aria-label="Gọi điện">📞</a>
+  </div>
+  
+
+  <script src="js/data.js"></script>
+  <script src="js/payment.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

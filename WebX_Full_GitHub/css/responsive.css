@@ -1,0 +1,121 @@
+/* ============================================================
+   WEB NHANH — responsive.css
+   Tối ưu hiển thị hoàn hảo trên Mobile, Tablet & Desktop
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 2.6rem;
+  }
+  .values-grid,
+  .demos-grid,
+  .pricing-grid,
+  .articles-grid,
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .timeline-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 0;
+  }
+  .nav-toggle {
+    display: block;
+  }
+  .nav-links {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    flex-direction: column;
+    padding: 20px;
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    display: none;
+    gap: 16px;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-actions .btn-nav {
+    display: none;
+  }
+  
+  .hero-section {
+    padding: 40px 0;
+  }
+  .hero-title {
+    font-size: 2.1rem;
+  }
+  .hero-intro {
+    font-size: 1.05rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-actions .btn {
+    width: 100%;
+  }
+  .hero-trust {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .hero-trust-item {
+    justify-content: center;
+  }
+  
+  .values-grid,
+  .demos-grid,
+  .pricing-grid,
+  .articles-grid,
+  .testimonials-grid,
+  .timeline-steps-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .pricing-card.featured {
+    transform: none;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .form-row-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .chat-panel {
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    max-width: 100vw;
+    height: 85vh;
+    border-radius: 20px 20px 0 0;
+  }
+  
+  .rocket-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
