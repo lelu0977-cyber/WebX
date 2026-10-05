@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    WebX — app.js
    Logic tương tác giao diện, hiển thị dữ liệu & Chatbot 24/7
    ============================================================ */
@@ -182,12 +182,14 @@
   }
 
   /* ---------- RENDER 6 GIÁ TRỊ CỐT LÕI (Hình 1) ---------- */
+  /* ---------- RENDER 6 GIÁ TRỊ CỐT LÕI (Slider trên Mobile: Vuốt chuyển & Tự chạy 2s) ---------- */
   function renderValues() {
     const wrap = $('#values-grid');
     if (!wrap) return;
 
-    wrap.innerHTML = data.coreValues.map(v => `
-      <div class="value-card">
+    wrap.innerHTML = data.coreValues.map((v, idx) => `
+      <div class="value-card ${idx === 0 ? 'active' : ''}" data-index="${idx}">
+        <span class="value-card-badge">Giá trị 0${idx + 1}</span>
         <div class="value-icon-box">
           ${svgIcons[v.icon] || ''}
         </div>
@@ -195,6 +197,266 @@
         <p class="value-desc">${v.desc}</p>
       </div>
     `).join('');
+
+    setupMobileSlider({
+      trackSelector: '#values-grid',
+      viewportSelector: '.values-slider-viewport',
+      dotsSelector: '#values-slider-dots',
+      prevBtnSelector: '.values-slider-prev',
+      nextBtnSelector: '.values-slider-next',
+      counterSelector: '#values-slider-counter',
+      timerBarSelector: '#values-timer-bar',
+      labelTotal: 'giá trị'
+    });
+  }
+
+  /* ---------- HÀM KHỞI TẠO SLIDER DI ĐỘNG DÙNG CHUNG (Vuốt chuyển & Tự chạy 2s) ---------- */
+  function setupMobileSlider({
+    trackSelector,
+    viewportSelector,
+    dotsSelector,
+    prevBtnSelector,
+    nextBtnSelector,
+    counterSelector,
+    timerBarSelector,
+    labelTotal = '',
+    autoplayMs = 2000
+  }) {
+    const track = $(trackSelector);
+    if (!track) return;
+    const viewport = $(viewportSelector) || track.parentElement;
+    const dotsContainer = dotsSelector ? $(dotsSelector) : null;
+    const prevBtn = prevBtnSelector ? $(prevBtnSelector) : null;
+    const nextBtn = nextBtnSelector ? $(nextBtnSelector) : null;
+    const counterText = counterSelector ? $(counterSelector) : null;
+    const timerBar = timerBarSelector ? $(timerBarSelector) : null;
+    if (!viewport) return;
+
+    const cards = [...track.children];
+    const total = cards.length;
+    if (total <= 1) return;
+
+    let currentIndex = 0;
+    let timerId = null;
+    let progressAnimId = null;
+    let progressStartTime = 0;
+
+    // Tạo các chấm tròn Dots
+    if (dotsContainer) {
+      dotsContainer.innerHTML = Array.from({ length: total }, (_, i) => `
+        <button type="button" class="slider-dot ${i === 0 ? 'active' : ''}" data-index="${i}" aria-label="Đến trang ${i + 1}" role="tab"></button>
+      `).join('');
+
+      $$('.slider-dot', dotsContainer).forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const targetIdx = parseInt(btn.dataset.index, 10);
+          goToSlide(targetIdx);
+        });
+      });
+    }
+
+    // Cập nhật giao diện
+    function updateUI(idx) {
+      cards.forEach((c, i) => {
+        c.classList.toggle('active', i === idx);
+      });
+
+      if (dotsContainer) {
+        $$('.slider-dot', dotsContainer).forEach((d, i) => {
+          d.classList.toggle('active', i === idx);
+        });
+      }
+
+      if (counterText) {
+        counterText.textContent = `0${idx + 1} / 0${total} ${labelTotal}`.trim();
+      }
+    }
+
+    // Chuyển tới slide index
+    function goToSlide(idx, animate = true) {
+      currentIndex = (idx + total) % total;
+      const isMobile = window.innerWidth <= 768;
+
+      if (isMobile) {
+        track.style.transition = animate ? 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)' : 'none';
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      } else {
+        track.style.transition = '';
+        track.style.transform = '';
+      }
+
+      updateUI(currentIndex);
+      startAutoplay();
+    }
+
+    function nextSlide() {
+      goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentIndex - 1);
+    }
+
+    // Nút prev / next
+    if (prevBtn) {
+      prevBtn.onclick = (e) => {
+        e.stopPropagation();
+        prevSlide();
+      };
+    }
+    if (nextBtn) {
+      nextBtn.onclick = (e) => {
+        e.stopPropagation();
+        nextSlide();
+      };
+    }
+
+    // Bộ đếm thời gian & thanh tiến trình 2 giây
+    function stopAutoplay() {
+      if (timerId) {
+        clearTimeout(timerId);
+        timerId = null;
+      }
+      if (progressAnimId) {
+        cancelAnimationFrame(progressAnimId);
+        progressAnimId = null;
+      }
+      if (timerBar) {
+        timerBar.style.width = '0%';
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      if (window.innerWidth > 768) return;
+
+      progressStartTime = performance.now();
+
+      function updateProgress(now) {
+        const elapsed = now - progressStartTime;
+        const progress = Math.min(elapsed / autoplayMs, 1);
+        if (timerBar) {
+          timerBar.style.width = `${progress * 100}%`;
+        }
+
+        if (progress < 1) {
+          progressAnimId = requestAnimationFrame(updateProgress);
+        }
+      }
+      progressAnimId = requestAnimationFrame(updateProgress);
+
+      timerId = setTimeout(() => {
+        nextSlide();
+      }, autoplayMs);
+    }
+
+    // Xử lý Vuốt cảm ứng Touch & Kéo chuột Drag
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let isDragging = false;
+    let isHorizontalGesture = false;
+
+    function handleStart(e) {
+      if (window.innerWidth > 768) return;
+      stopAutoplay();
+
+      isDragging = true;
+      isHorizontalGesture = false;
+      const point = e.touches ? e.touches[0] : e;
+      startX = point.clientX;
+      startY = point.clientY;
+      currentX = startX;
+      currentY = startY;
+
+      track.style.transition = 'none';
+    }
+
+    function handleMove(e) {
+      if (!isDragging || window.innerWidth > 768) return;
+      const point = e.touches ? e.touches[0] : e;
+      currentX = point.clientX;
+      currentY = point.clientY;
+
+      const diffX = currentX - startX;
+      const diffY = currentY - startY;
+
+      if (!isHorizontalGesture) {
+        if (Math.abs(diffX) > 8 && Math.abs(diffX) > Math.abs(diffY)) {
+          isHorizontalGesture = true;
+        } else if (Math.abs(diffY) > 8) {
+          isDragging = false;
+          track.style.transition = 'transform 0.3s ease';
+          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+          startAutoplay();
+          return;
+        }
+      }
+
+      if (isHorizontalGesture) {
+        if (e.cancelable) e.preventDefault();
+        const baseOffset = -currentIndex * 100;
+        const viewportWidth = viewport.clientWidth || 300;
+        const percentMoved = (diffX / viewportWidth) * 100;
+        track.style.transform = `translateX(${baseOffset + percentMoved}%)`;
+      }
+    }
+
+    function handleEnd() {
+      if (!isDragging || window.innerWidth > 768) return;
+      isDragging = false;
+
+      const diffX = currentX - startX;
+      const threshold = 40; // Kéo hơn 40px thì chuyển ảnh
+
+      if (isHorizontalGesture && Math.abs(diffX) > threshold) {
+        if (diffX < 0) {
+          nextSlide(); // Vuốt sang trái -> chuyển sang ảnh sau
+        } else {
+          prevSlide(); // Vuốt sang phải -> quay lại ảnh trước
+        }
+      } else {
+        goToSlide(currentIndex); // Khôi phục vị trí cũ
+      }
+    }
+
+    // Touch events
+    viewport.addEventListener('touchstart', handleStart, { passive: true });
+    viewport.addEventListener('touchmove', handleMove, { passive: false });
+    viewport.addEventListener('touchend', handleEnd);
+    viewport.addEventListener('touchcancel', handleEnd);
+
+    // Mouse drag events
+    viewport.addEventListener('mousedown', handleStart);
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging) handleMove(e);
+    });
+    window.addEventListener('mouseup', () => {
+      if (isDragging) handleEnd();
+    });
+
+    // Hover tạm dừng
+    viewport.addEventListener('mouseenter', stopAutoplay);
+    viewport.addEventListener('mouseleave', () => {
+      if (!isDragging && window.innerWidth <= 768) startAutoplay();
+    });
+
+    // Cập nhật khi resize
+    window.addEventListener('resize', () => {
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile) {
+        goToSlide(currentIndex);
+      } else {
+        stopAutoplay();
+        track.style.transition = '';
+        track.style.transform = '';
+      }
+    });
+
+    // Khởi chạy slide đầu tiên
+    goToSlide(0);
   }
 
   /* ---------- RENDER LỘ TRÌNH 4 BƯỚC (Hình 2) ---------- */
@@ -215,6 +477,17 @@
         <span class="step-highlight">✦ ${s.highlight}</span>
       </div>
     `).join('');
+
+    setupMobileSlider({
+      trackSelector: '#timeline-steps-grid',
+      viewportSelector: '.timeline-slider-wrap .slider-viewport',
+      dotsSelector: '#timeline-dots',
+      prevBtnSelector: '.timeline-prev',
+      nextBtnSelector: '.timeline-next',
+      counterSelector: '#timeline-counter',
+      timerBarSelector: '#timeline-timer-bar',
+      labelTotal: 'bước'
+    });
   }
 
   /* ---------- RENDER DEMOS TRÊN TRANG CHỦ ---------- */
@@ -242,6 +515,17 @@
         </div>
       </div>
     `).join('');
+
+    setupMobileSlider({
+      trackSelector: '#demos-grid',
+      viewportSelector: '.demos-slider-wrap .slider-viewport',
+      dotsSelector: '#demos-dots',
+      prevBtnSelector: '.demos-prev',
+      nextBtnSelector: '.demos-next',
+      counterSelector: '#demos-counter',
+      timerBarSelector: '#demos-timer-bar',
+      labelTotal: 'mẫu'
+    });
   }
 
   /* ---------- RENDER BẢNG GIÁ ---------- */
@@ -276,6 +560,17 @@
         }
       });
     });
+
+    setupMobileSlider({
+      trackSelector: '#pricing-grid',
+      viewportSelector: '.pricing-slider-wrap .slider-viewport',
+      dotsSelector: '#pricing-dots',
+      prevBtnSelector: '.pricing-prev',
+      nextBtnSelector: '.pricing-next',
+      counterSelector: '#pricing-counter',
+      timerBarSelector: '#pricing-timer-bar',
+      labelTotal: 'gói'
+    });
   }
 
   /* ---------- RENDER ĐÁNH GIÁ (TESTIMONIALS) ---------- */
@@ -296,6 +591,17 @@
         </div>
       </div>
     `).join('');
+
+    setupMobileSlider({
+      trackSelector: '#testimonials-grid',
+      viewportSelector: '.testimonials-slider-wrap .slider-viewport',
+      dotsSelector: '#testimonials-dots',
+      prevBtnSelector: '.testimonials-prev',
+      nextBtnSelector: '.testimonials-next',
+      counterSelector: '#testimonials-counter',
+      timerBarSelector: '#testimonials-timer-bar',
+      labelTotal: 'đánh giá'
+    });
   }
 
   /* ---------- RENDER BÀI VIẾT TIN TỨC ---------- */
@@ -319,6 +625,17 @@
         </div>
       </div>
     `).join('');
+
+    setupMobileSlider({
+      trackSelector: '#articles-grid',
+      viewportSelector: '.articles-slider-wrap .slider-viewport',
+      dotsSelector: '#articles-dots',
+      prevBtnSelector: '.articles-prev',
+      nextBtnSelector: '.articles-next',
+      counterSelector: '#articles-counter',
+      timerBarSelector: '#articles-timer-bar',
+      labelTotal: 'bài viết'
+    });
   }
 
   /* ---------- FORM BÁO GIÁ LIÊN HỆ ---------- */

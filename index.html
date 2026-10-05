@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
@@ -31,8 +31,7 @@
         <a href="index.html#process">Quy trình</a>
         <a href="tin-tuc.html" class="">Cẩm nang</a>
         <a href="thanh-toan.html" class="" style="color: var(--primary); font-weight: 800;">Thanh toán QR</a>
-        <a href="admin.html" class="admin-only-link" style="color: var(--secondary-dark); font-size: 0.88rem; display: none !important;">Quản trị</a>
-      </nav>
+        </nav>
 
       <div class="nav-actions">
         <a href="index.html#contact" class="btn btn-primary btn-nav">Nhận báo giá</a>
@@ -78,8 +77,42 @@
         <p class="section-sub">Chúng mình biến việc làm website từ phức tạp, tốn kém thành một trải nghiệm tinh gọn, minh bạch và hiệu quả thiết thực.</p>
       </div>
 
-      <div class="values-grid" id="values-grid">
-        <!-- Render từ js/data.js -->
+      <!-- Khung Slider (Tối ưu vuốt chạm & tự chuyển 2s trên Mobile, giữ nguyên Grid 3 cột trên Desktop) -->
+      <div class="values-slider-wrap">
+        <div class="values-slider-viewport">
+          <div class="values-grid" id="values-grid">
+            <!-- Render từ js/data.js -->
+          </div>
+        </div>
+
+        <!-- Điều khiển thanh trượt: Phím bấm, Chấm dots, Đếm thẻ, Thanh tiến trình tự chạy 2s -->
+        <div class="values-slider-controls">
+          <button type="button" class="values-slider-btn values-slider-prev" aria-label="Thẻ trước đó" title="Thẻ trước">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+
+          <div class="values-slider-dots" id="values-slider-dots" role="tablist" aria-label="Chọn thẻ giá trị"></div>
+
+          <button type="button" class="values-slider-btn values-slider-next" aria-label="Thẻ kế tiếp" title="Thẻ kế tiếp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Thông tin hiển thị: Tự động chuyển sau 2s & Tiến trình -->
+        <div class="values-slider-meta">
+          <div class="values-slider-badge">
+            <span class="badge-live-pulse"></span>
+            <span id="values-slider-counter">01 / 06</span>
+            <span class="badge-hint">• Vuốt chuyển thẻ / Tự đổi sau 2s</span>
+          </div>
+          <div class="values-timer-bar-wrap">
+            <div class="values-timer-bar-fill" id="values-timer-bar"></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -93,8 +126,34 @@
         <p class="section-sub">Bấm vào từng ngành để xem website demo thật 100% — đây chính là thứ khách hàng của bạn sẽ nhận được khi truy cập quán.</p>
       </div>
 
-      <div class="demos-grid" id="demos-grid">
-        <!-- Render từ js/data.js -->
+      <!-- Khung Slider Mẫu Website (Vuốt chuyển mẫu & Tự động 2s trên Mobile) -->
+      <div class="slider-section-wrap demos-slider-wrap">
+        <div class="slider-viewport">
+          <div class="demos-grid" id="demos-grid">
+            <!-- Render từ js/data.js -->
+          </div>
+        </div>
+
+        <div class="slider-controls">
+          <button type="button" class="slider-btn demos-prev" aria-label="Mẫu trước">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="slider-dots" id="demos-dots" role="tablist"></div>
+          <button type="button" class="slider-btn demos-next" aria-label="Mẫu kế tiếp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="slider-meta">
+          <div class="slider-badge">
+            <span class="badge-live-pulse"></span>
+            <span class="slider-counter-text" id="demos-counter">01 / 03</span>
+            <span class="badge-hint">• Vuốt xem mẫu / Tự đổi sau 2s</span>
+          </div>
+          <div class="slider-progress-track">
+            <div class="slider-progress-fill" id="demos-timer-bar"></div>
+          </div>
+        </div>
       </div>
 
       <div style="text-align: center; margin-top: 40px;">
@@ -138,8 +197,34 @@
         </svg>
       </div>
 
-      <div class="timeline-steps-grid" id="timeline-steps-grid">
-        <!-- Render từ js/data.js -->
+      <!-- Khung Slider Quy trình 4 bước (Vuốt chuyển bước & Tự động 2s trên Mobile) -->
+      <div class="slider-section-wrap timeline-slider-wrap">
+        <div class="slider-viewport">
+          <div class="timeline-steps-grid" id="timeline-steps-grid">
+            <!-- Render từ js/data.js -->
+          </div>
+        </div>
+
+        <div class="slider-controls">
+          <button type="button" class="slider-btn timeline-prev" aria-label="Bước trước">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="slider-dots" id="timeline-dots" role="tablist"></div>
+          <button type="button" class="slider-btn timeline-next" aria-label="Bước kế tiếp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="slider-meta">
+          <div class="slider-badge">
+            <span class="badge-live-pulse"></span>
+            <span class="slider-counter-text" id="timeline-counter">01 / 04</span>
+            <span class="badge-hint">• Vuốt chuyển bước / Tự đổi sau 2s</span>
+          </div>
+          <div class="slider-progress-track">
+            <div class="slider-progress-fill" id="timeline-timer-bar"></div>
+          </div>
+        </div>
       </div>
 
       <div class="rocket-banner">
@@ -161,8 +246,34 @@
         <p class="section-sub">Bạn biết chính xác mình trả bao nhiêu và nhận lại những gì. Không tốn tiền nuôi web định kỳ hàng tháng.</p>
       </div>
 
-      <div class="pricing-grid" id="pricing-grid">
-        <!-- Render từ js/data.js -->
+      <!-- Khung Slider Bảng giá (Vuốt chuyển gói & Tự động 2s trên Mobile) -->
+      <div class="slider-section-wrap pricing-slider-wrap">
+        <div class="slider-viewport">
+          <div class="pricing-grid" id="pricing-grid">
+            <!-- Render từ js/data.js -->
+          </div>
+        </div>
+
+        <div class="slider-controls">
+          <button type="button" class="slider-btn pricing-prev" aria-label="Gói trước">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="slider-dots" id="pricing-dots" role="tablist"></div>
+          <button type="button" class="slider-btn pricing-next" aria-label="Gói kế tiếp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="slider-meta">
+          <div class="slider-badge">
+            <span class="badge-live-pulse"></span>
+            <span class="slider-counter-text" id="pricing-counter">01 / 03</span>
+            <span class="badge-hint">• Vuốt xem các gói / Tự đổi sau 2s</span>
+          </div>
+          <div class="slider-progress-track">
+            <div class="slider-progress-fill" id="pricing-timer-bar"></div>
+          </div>
+        </div>
       </div>
 
       <div style="margin-top: 30px; text-align: center;">
@@ -183,8 +294,34 @@
         <p class="section-sub">Sự hài lòng và doanh thu tăng trưởng của khách hàng là thước đo thành công lớn nhất của chúng mình.</p>
       </div>
 
-      <div class="testimonials-grid" id="testimonials-grid">
-        <!-- Render từ js/data.js -->
+      <!-- Khung Slider Đánh giá khách hàng (Vuốt chuyển & Tự động 2s trên Mobile) -->
+      <div class="slider-section-wrap testimonials-slider-wrap">
+        <div class="slider-viewport">
+          <div class="testimonials-grid" id="testimonials-grid">
+            <!-- Render từ js/data.js -->
+          </div>
+        </div>
+
+        <div class="slider-controls">
+          <button type="button" class="slider-btn testimonials-prev" aria-label="Đánh giá trước">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="slider-dots" id="testimonials-dots" role="tablist"></div>
+          <button type="button" class="slider-btn testimonials-next" aria-label="Đánh giá kế tiếp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="slider-meta">
+          <div class="slider-badge">
+            <span class="badge-live-pulse"></span>
+            <span class="slider-counter-text" id="testimonials-counter">01 / 03</span>
+            <span class="badge-hint">• Vuốt xem đánh giá / Tự đổi sau 2s</span>
+          </div>
+          <div class="slider-progress-track">
+            <div class="slider-progress-fill" id="testimonials-timer-bar"></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -198,8 +335,34 @@
         <p class="section-sub">Những chia sẻ ngắn gọn, thực tế giúp quán của bạn vận hành trơn tru và hút thêm nhiều khách hàng mới.</p>
       </div>
 
-      <div class="articles-grid" id="articles-grid">
-        <!-- Render từ js/data.js -->
+      <!-- Khung Slider Cẩm nang kinh doanh (Vuốt chuyển bài & Tự động 2s trên Mobile) -->
+      <div class="slider-section-wrap articles-slider-wrap">
+        <div class="slider-viewport">
+          <div class="articles-grid" id="articles-grid">
+            <!-- Render từ js/data.js -->
+          </div>
+        </div>
+
+        <div class="slider-controls">
+          <button type="button" class="slider-btn articles-prev" aria-label="Bài trước">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="slider-dots" id="articles-dots" role="tablist"></div>
+          <button type="button" class="slider-btn articles-next" aria-label="Bài kế tiếp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="slider-meta">
+          <div class="slider-badge">
+            <span class="badge-live-pulse"></span>
+            <span class="slider-counter-text" id="articles-counter">01 / 03</span>
+            <span class="badge-hint">• Vuốt xem bài viết / Tự đổi sau 2s</span>
+          </div>
+          <div class="slider-progress-track">
+            <div class="slider-progress-fill" id="articles-timer-bar"></div>
+          </div>
+        </div>
       </div>
 
       <div style="text-align: center; margin-top: 36px;">
@@ -329,7 +492,7 @@
             <li><a href="demo-spa/" target="_blank">Serenity Spa & Clinic</a></li>
             <li><a href="demo-gym/" target="_blank">IronPulse Fitness & Gym</a></li>
             <li><a href="thanh-toan.html">Thanh toán VietQR</a></li>
-            <li class="admin-only-link" style="display: none !important;"><a href="admin.html">Trang quản trị</a></li>
+            <li class="admin-only-link" style="display: none !important;"></li>
           </ul>
         </div>
 
@@ -516,6 +679,7 @@
   </script>
 </body>
 </html>
+
 
 
 

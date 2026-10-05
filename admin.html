@@ -146,8 +146,7 @@
         <a href="index.html#process">Quy trình</a>
         <a href="tin-tuc.html" class="">Cẩm nang</a>
         <a href="thanh-toan.html" class="" style="color: var(--primary); font-weight: 800;">Thanh toán QR</a>
-        <a href="admin.html" class="active" style="color: var(--secondary-dark); font-size: 0.88rem;">Quản trị</a>
-      </nav>
+        </nav>
 
       <div class="nav-actions">
         <a href="index.html#contact" class="btn btn-primary btn-nav">Nhận báo giá</a>
@@ -157,6 +156,27 @@
   </header>
   
 
+    <!-- MAN HINH KHOA PIN ADMIN -->
+  <div id="admin-lock-screen" style="min-height: 75vh; display: flex; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #ffffff; border: 2px solid #e85d26; border-radius: 28px; padding: 44px 32px; max-width: 440px; width: 100%; text-align: center; box-shadow: 0 25px 60px rgba(232, 93, 38, 0.18);">
+      <div style="width: 68px; height: 68px; background: #fff2eb; color: #e85d26; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 18px; border: 1.5px solid #f8c9b3;">🔐</div>
+      <h2 style="font-size: 1.6rem; color: #1e293b; margin-bottom: 8px; font-weight: 800;">Xác Thực Quản Trị Viên</h2>
+      <p style="font-size: 0.92rem; color: #64748b; margin-bottom: 26px;">Trang này được bảo vệ nghiêm ngặt. Vui lòng nhập mã PIN quản trị để mở khóa:</p>
+      
+      <form id="admin-lock-form" onsubmit="return handleAdminLogin(event)">
+        <input type="password" id="admin-pin-pass" placeholder="Nhập mã PIN..." maxlength="10" autofocus style="width: 100%; padding: 15px; border-radius: 14px; border: 2px solid #cbd5e1; font-size: 1.3rem; text-align: center; letter-spacing: 5px; font-weight: 800; outline: none; margin-bottom: 14px; background: #f8fafc;" />
+        <div id="admin-pin-err" style="color: #ef4444; font-size: 0.88rem; font-weight: 700; margin-bottom: 14px; display: none;">❌ Mã PIN không chính xác! Vui lòng thử lại.</div>
+        <button type="submit" style="width: 100%; background: #e85d26; color: #fff; border: none; padding: 15px; border-radius: 999px; font-size: 1.05rem; font-weight: 800; cursor: pointer; box-shadow: 0 8px 20px rgba(232, 93, 38, 0.3); transition: all 0.2s ease;">
+          Mở Khóa Quản Trị 🚀
+        </button>
+        <div style="margin-top: 20px;">
+          <a href="index.html" style="font-size: 0.9rem; color: #64748b; text-decoration: none; font-weight: 600;">← Quay lại Trang chủ WebX</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="admin-main-wrap" style="display: none;">
   <div class="admin-wrap">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;">
       <div>
@@ -167,6 +187,7 @@
         <button class="btn btn-ghost btn-sm" id="btn-reset-data" style="color: #e11d48; border-color: #fecdd3; background: #fff1f2;" title="Xóa dữ liệu tạm và đặt lại danh sách mẫu về mặc định">🔄 Đặt lại mặc định (Reset)</button>
         <button class="btn btn-ghost btn-sm" id="btn-export-json">💾 Xuất dữ liệu (JSON)</button>
         <a href="index.html" class="btn btn-primary btn-sm">Xem Website Ngoài ↗</a>
+        <button onclick="logoutAdmin()" class="btn btn-ghost btn-sm" style="color: #ef4444; border-color: #fca5a5; cursor: pointer;">🔒 Khóa / Đăng xuất</button>
       </div>
     </div>
 
@@ -312,6 +333,8 @@
 
   
   <!-- ===== FOOTER ===== -->
+  </div><!-- /#admin-main-wrap -->
+
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -388,6 +411,44 @@
   <script src="js/data.js"></script>
   <script src="js/admin.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    function checkAdminAuth() {
+      if (sessionStorage.getItem('webx_admin_authed') === 'true') {
+        document.getElementById('admin-lock-screen').style.display = 'none';
+        document.getElementById('admin-main-wrap').style.display = 'block';
+      } else {
+        document.getElementById('admin-lock-screen').style.display = 'flex';
+        document.getElementById('admin-main-wrap').style.display = 'none';
+        setTimeout(function() {
+          var p = document.getElementById('admin-pin-pass');
+          if (p) p.focus();
+        }, 150);
+      }
+    }
+
+    function handleAdminLogin(e) {
+      if (e) e.preventDefault();
+      var pass = (document.getElementById('admin-pin-pass').value || '').trim();
+      var err = document.getElementById('admin-pin-err');
+      if (pass === '1104' || pass === 'long114' || pass === 'admin123') {
+        sessionStorage.setItem('webx_admin_authed', 'true');
+        checkAdminAuth();
+      } else {
+        if (err) err.style.display = 'block';
+        document.getElementById('admin-pin-pass').focus();
+      }
+      return false;
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem('webx_admin_authed');
+      localStorage.removeItem('webx_is_admin');
+      checkAdminAuth();
+    }
+
+    document.addEventListener('DOMContentLoaded', checkAdminAuth);
+  </script>
 </body>
 </html>
+
 

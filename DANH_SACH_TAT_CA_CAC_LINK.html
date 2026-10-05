@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebX — Tổng Hợp Toàn Bộ Đường Link Dự Án</title>
+  <style>
+    :root {
+      --primary: #e85d26;
+      --primary-dark: #c94917;
+      --primary-light: #fff2eb;
+      --secondary: #38a9d1;
+      --secondary-light: #eaf7fb;
+      --ink: #2a2e37;
+      --ink-secondary: #565d6d;
+      --bg: #fcfaf6;
+      --white: #ffffff;
+      --border: #e8ded2;
+      --radius: 16px;
+      --shadow: 0 8px 24px rgba(42, 46, 55, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      padding: 30px 16px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+      padding: 24px;
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 14px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px dashed var(--primary);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    h1 span { color: var(--primary); }
+    .subtitle {
+      color: var(--ink-secondary);
+      font-size: 1rem;
+    }
+    .action-top {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      font-size: 0.95rem;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(232, 93, 38, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: var(--secondary);
+      color: #fff;
+    }
+    .btn-secondary:hover {
+      background: #258cb2;
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      background: var(--white);
+      color: var(--ink);
+      border: 2px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .section-box {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 2px solid var(--border);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: #faf8f5;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.2s ease;
+    }
+    .link-card:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(232, 93, 38, 0.12);
+    }
+    .link-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .link-name {
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+    .link-url {
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+      word-break: break-all;
+    }
+    .link-badge {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e2e8f0;
+      color: var(--ink-secondary);
+      white-space: nowrap;
+      margin-left: 8px;
+    }
+    .link-card:hover .link-badge {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .notice {
+      background: #eaf7fb;
+      border-left: 4px solid var(--secondary);
+      padding: 14px 16px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      color: #1e647d;
+      margin-top: 14px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: var(--ink-secondary);
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <span class="badge">🚀 WebX — Bản Cập Nhật Mới Nhất</span>
+    <h1>Bảng Tổng Hợp <span>Toàn Bộ Đường Link</span> WebX</h1>
+    <p class="subtitle">Đã tích hợp đầy đủ tính năng Slider vuốt cảm ứng & tự chuyển 2s trên điện thoại cho tất cả các phần.</p>
+    
+    <div class="action-top">
+      <a href="https://lelu0977-cyber.github.io/WebX/" target="_blank" class="btn btn-primary">🌐 Mở Website Online (GitHub Pages) ↗</a>
+      <a href="./index.html" target="_blank" class="btn btn-secondary">💻 Mở Website Offline Trên Máy ↗</a>
+      <a href="https://github.com/lelu0977-cyber/WebX/upload/main" target="_blank" class="btn btn-ghost">📤 Tải File Lên GitHub ↗</a>
+    </div>
+  </div>
+
+  <!-- PHẦN 1: LINK ONLINE ĐANG CHẠY TRÊN INTERNET -->
+  <div class="section-box">
+    <h2 class="section-title">🌐 1. Các Link Online Chính Thức (GitHub Pages)</h2>
+    <div class="link-grid">
+      <a href="https://lelu0977-cyber.github.io/WebX/" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">🏠 Trang chủ WebX</span>
+          <span class="link-url">https://lelu0977-cyber.github.io/WebX/</span>
+        </div>
+        <span class="link-badge">Online</span>
+      </a>
+
+      <a href="https://lelu0977-cyber.github.io/WebX/san-pham.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">🎨 Mẫu Website</span>
+          <span class="link-url">.../san-pham.html</span>
+        </div>
+        <span class="link-badge">Online</span>
+      </a>
+
+      <a href="https://lelu0977-cyber.github.io/WebX/index.html#pricing" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">💰 Bảng giá trọn gói</span>
+          <span class="link-url">.../index.html#pricing</span>
+        </div>
+        <span class="link-badge">Online</span>
+      </a>
+
+      <a href="https://lelu0977-cyber.github.io/WebX/index.html#process" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">🚀 Quy trình 4 bước</span>
+          <span class="link-url">.../index.html#process</span>
+        </div>
+        <span class="link-badge">Online</span>
+      </a>
+
+      <a href="https://lelu0977-cyber.github.io/WebX/tin-tuc.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">📖 Cẩm nang kinh doanh</span>
+          <span class="link-url">.../tin-tuc.html</span>
+        </div>
+        <span class="link-badge">Online</span>
+      </a>
+
+      <a href="https://lelu0977-cyber.github.io/WebX/thanh-toan.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">⚡ Thanh toán QR tự động</span>
+          <span class="link-url">.../thanh-toan.html</span>
+        </div>
+        <span class="link-badge">Online</span>
+      </a>
+
+      <a href="https://lelu0977-cyber.github.io/WebX/admin.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">🔒 Trang Quản trị Admin</span>
+          <span class="link-url">.../admin.html</span>
+        </div>
+        <span class="link-badge">Online</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- PHẦN 2: LINK CÁC WEBSITE MẪU DEMO -->
+  <div class="section-box">
+    <h2 class="section-title">🏪 2. Link Website Mẫu Thực Chiến (Chạy Thật 100%)</h2>
+    <div class="link-grid">
+      <a href="https://lelu0977-cyber.github.io/WebX/demo-cafe/" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">☕ Demo Quán Cà Phê</span>
+          <span class="link-url">.../demo-cafe/</span>
+        </div>
+        <span class="link-badge">Demo</span>
+      </a>
+
+      <a href="https://lelu0977-cyber.github.io/WebX/demo-spa/" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">💆 Demo Spa & Thẩm Mỹ</span>
+          <span class="link-url">.../demo-spa/</span>
+        </div>
+        <span class="link-badge">Demo</span>
+      </a>
+
+      <a href="https://lelu0977-cyber.github.io/WebX/demo-gym/" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">🏋️ Demo Phòng Gym & Fitness</span>
+          <span class="link-url">.../demo-gym/</span>
+        </div>
+        <span class="link-badge">Demo</span>
+      </a>
+
+      <a href="https://lelu0977-cyber.github.io/WebX/demo-nhan-bac/" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">💍 Demo Tiệm Nhẫn Bạc / Trang Sức</span>
+          <span class="link-url">.../demo-nhan-bac/</span>
+        </div>
+        <span class="link-badge">Demo</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- PHẦN 3: LINK GITHUB & QUẢN LÝ -->
+  <div class="section-box">
+    <h2 class="section-title">🛠️ 3. Link Quản Lý Kho Mã Nguồn GitHub</h2>
+    <div class="link-grid">
+      <a href="https://github.com/lelu0977-cyber/WebX" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">💻 Kho Lưu Trữ (Repository)</span>
+          <span class="link-url">https://github.com/lelu0977-cyber/WebX</span>
+        </div>
+        <span class="link-badge">GitHub</span>
+      </a>
+
+      <a href="https://github.com/lelu0977-cyber/WebX/upload/main" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">📤 Tải Lên File Cập Nhật</span>
+          <span class="link-url">.../WebX/upload/main</span>
+        </div>
+        <span class="link-badge">Upload</span>
+      </a>
+
+      <a href="https://github.com/lelu0977-cyber/WebX/settings/pages" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">⚙️ Cài Đặt GitHub Pages</span>
+          <span class="link-url">.../WebX/settings/pages</span>
+        </div>
+        <span class="link-badge">Settings</span>
+      </a>
+    </div>
+    <div class="notice">
+      💡 <b>Cách đẩy bản mới lên GitHub Pages:</b> Mở link <b>"Tải Lên File Cập Nhật"</b> ở trên ➔ Kéo thả toàn bộ nội dung trong thư mục <code>WEBX-FULL-PROJECT</code> vào ➔ Bấm <b>Commit changes</b> là xong!
+    </div>
+  </div>
+
+  <!-- PHẦN 4: LINK TRỰC TIẾP TRÊN MÁY TÍNH (OFFLINE) -->
+  <div class="section-box">
+    <h2 class="section-title">📂 4. Link Mở Trực Tiếp Trên Máy Tính (Offline Không Cần Mạng)</h2>
+    <div class="link-grid">
+      <a href="./index.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">📄 Trang chủ Offline</span>
+          <span class="link-url">index.html</span>
+        </div>
+        <span class="link-badge">Local</span>
+      </a>
+
+      <a href="./san-pham.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">📄 Mẫu Website Offline</span>
+          <span class="link-url">san-pham.html</span>
+        </div>
+        <span class="link-badge">Local</span>
+      </a>
+
+      <a href="./thanh-toan.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">📄 Thanh toán QR Offline</span>
+          <span class="link-url">thanh-toan.html</span>
+        </div>
+        <span class="link-badge">Local</span>
+      </a>
+
+      <a href="./tin-tuc.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">📄 Cẩm nang Offline</span>
+          <span class="link-url">tin-tuc.html</span>
+        </div>
+        <span class="link-badge">Local</span>
+      </a>
+
+      <a href="./admin.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">📄 Quản trị Admin Offline</span>
+          <span class="link-url">admin.html</span>
+        </div>
+        <span class="link-badge">Local</span>
+      </a>
+
+      <a href="./demo-cafe/index.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">☕ Demo Cafe Offline</span>
+          <span class="link-url">demo-cafe/index.html</span>
+        </div>
+        <span class="link-badge">Local</span>
+      </a>
+
+      <a href="./demo-spa/index.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">💆 Demo Spa Offline</span>
+          <span class="link-url">demo-spa/index.html</span>
+        </div>
+        <span class="link-badge">Local</span>
+      </a>
+
+      <a href="./demo-gym/index.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">🏋️ Demo Gym Offline</span>
+          <span class="link-url">demo-gym/index.html</span>
+        </div>
+        <span class="link-badge">Local</span>
+      </a>
+
+      <a href="./demo-nhan-bac/index.html" target="_blank" class="link-card">
+        <div class="link-info">
+          <span class="link-name">💍 Demo Nhẫn Bạc Offline</span>
+          <span class="link-url">demo-nhan-bac/index.html</span>
+        </div>
+        <span class="link-badge">Local</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 WebX — Thiết kế & lập trình bởi Lê Thành Long. Đã tối ưu hoàn hảo cho Điện thoại & Máy tính.</p>
+  </div>
+</div>
+
+</body>
+</html>

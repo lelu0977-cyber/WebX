@@ -79,13 +79,238 @@
     justify-content: center;
   }
   
+  /* HỆ THỐNG SLIDER TRƯỢT MƯỢT MÀ TRÊN MOBILE (Vuốt chuyển ảnh & Tự động 2s) */
+  .values-slider-wrap,
+  .slider-section-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .values-slider-viewport,
+  .slider-viewport {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    padding: 8px 4px 16px 4px;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+  }
+  .values-slider-viewport:active,
+  .slider-viewport:active {
+    cursor: grabbing;
+  }
+
+  /* Chuyển đổi các khối Grid thành Flex Track trượt trên mobile */
   .values-grid,
   .demos-grid,
   .pricing-grid,
   .articles-grid,
   .testimonials-grid,
   .timeline-steps-grid {
-    grid-template-columns: 1fr;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0 !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  /* Chiều rộng từng thẻ là 100% viewport */
+  .values-grid .value-card,
+  .demos-grid .demo-card,
+  .pricing-grid .pricing-card,
+  .articles-grid .article-card,
+  .testimonials-grid .testimonial-card,
+  .timeline-steps-grid .timeline-step-card {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    margin: 0;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .values-grid .value-card {
+    padding: 32px 20px;
+    min-height: 290px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: var(--radius-lg);
+    background: #ffffff;
+    border: 2px solid var(--secondary-border);
+    box-shadow: 0 6px 20px rgba(56, 169, 209, 0.08);
+  }
+
+  .timeline-steps-grid .timeline-step-card {
+    padding: 26px 20px;
+    background: #ffffff;
+    border: 2px solid var(--border-card);
+    border-radius: var(--radius-md);
+    box-shadow: 0 6px 20px rgba(42, 46, 55, 0.06);
+  }
+
+  .pricing-grid .pricing-card {
+    padding: 32px 22px;
+    background: #ffffff;
+    border: 2px solid var(--border-card);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 6px 20px rgba(42, 46, 55, 0.06);
+    transform: none !important;
+  }
+
+  .pricing-card.featured {
+    transform: none !important;
+  }
+
+  .articles-grid .article-card {
+    background: #ffffff;
+    border: 2px solid var(--border-card);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 6px 20px rgba(42, 46, 55, 0.06);
+    overflow: hidden;
+  }
+
+  .demos-grid .demo-card {
+    background: #ffffff;
+    border: 2px solid var(--border-card);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 6px 20px rgba(42, 46, 55, 0.06);
+    overflow: hidden;
+  }
+
+  .testimonials-grid .testimonial-card {
+    padding: 28px 22px;
+    background: #ffffff;
+    border: 2px solid var(--border-card);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 6px 20px rgba(42, 46, 55, 0.06);
+  }
+
+  /* Trạng thái Active khi thẻ đang hiển thị */
+  .values-grid .value-card.active,
+  .demos-grid .demo-card.active,
+  .pricing-grid .pricing-card.active,
+  .articles-grid .article-card.active,
+  .testimonials-grid .testimonial-card.active,
+  .timeline-steps-grid .timeline-step-card.active {
+    border-color: var(--primary) !important;
+    box-shadow: 0 10px 28px rgba(232, 93, 38, 0.16) !important;
+  }
+
+  /* Điều khiển chung cho Slider: Nút prev/next & Chấm dots */
+  .values-slider-controls,
+  .slider-controls {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .values-slider-btn,
+  .slider-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--secondary-border);
+    background: #ffffff;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .values-slider-btn:active,
+  .slider-btn:active {
+    transform: scale(0.92);
+    background: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .values-slider-dots,
+  .slider-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .values-dot,
+  .slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .values-dot.active,
+  .slider-dot.active {
+    width: 26px;
+    border-radius: 999px;
+    background: var(--primary);
+    box-shadow: 0 2px 8px rgba(232, 93, 38, 0.4);
+  }
+  .values-slider-meta,
+  .slider-meta {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .values-slider-badge,
+  .slider-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: var(--ink-secondary);
+    font-weight: 600;
+    background: rgba(232, 93, 38, 0.06);
+    padding: 3px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(232, 93, 38, 0.15);
+  }
+  .badge-live-pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(232, 93, 38, 0.7);
+    animation: pulse-live 1.8s infinite;
+  }
+  .badge-hint {
+    color: var(--ink-muted);
+    font-size: 0.78rem;
+  }
+  .values-timer-bar-wrap,
+  .slider-progress-track {
+    width: 140px;
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .values-timer-bar-fill,
+  .slider-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--secondary), var(--primary));
+    border-radius: 999px;
+    transition: width 0.1s linear;
   }
   
   .pricing-card.featured {
