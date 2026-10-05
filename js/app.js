@@ -137,6 +137,7 @@
     renderPricing();
     renderTestimonials();
     renderArticles();
+    initFaqAccordion();
     initQuoteForm();
     initChatbot();
     initZaloQRModal();
@@ -960,8 +961,47 @@
     }
   }
 
-  /* ---------- POPUP HIỂN THỊ MÃ QR ZALO (LÊ THÀNH LONG) ---------- */
-  
+  /* ---------- FAQ ACCORDION (CHỦ QUÁN HAY HỎI) ---------- */
+  function initFaqAccordion() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    if (!faqItems || faqItems.length === 0) return;
+
+    faqItems.forEach((item) => {
+      const header = item.querySelector('.faq-item-header');
+      if (!header) return;
+
+      header.addEventListener('click', () => {
+        const isCurrentActive = item.classList.contains('active');
+
+        // Đóng các câu hỏi khác để giữ giao diện gọn gàng, không bị dài trang
+        faqItems.forEach((other) => {
+          if (other !== item) {
+            other.classList.remove('active');
+            const otherHeader = other.querySelector('.faq-item-header');
+            if (otherHeader) otherHeader.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Bật / tắt câu được chọn
+        if (isCurrentActive) {
+          item.classList.remove('active');
+          header.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('active');
+          header.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      // Trợ năng phím bấm (Enter / Space)
+      header.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          header.click();
+        }
+      });
+    });
+  }
+
   /* ---------- BẢO MẬT & ẨN HIỆN NÚT QUẢN TRỊ (ADMIN MODE) ---------- */
   function initAdminModeSecurity() {
     // 1. Kiểm tra tham số bí mật: ?admin=1 hoặc ?key=1104 hoặc #admin

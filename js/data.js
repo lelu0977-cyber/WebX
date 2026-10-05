@@ -387,6 +387,50 @@ window.WEBNHANH_DATA = {
     }
   ],
 
+  /* --- Danh sách câu hỏi thường gặp (Chủ quán hay hỏi) --- */
+  faqList: [
+    {
+      q: "Tôi không rành về máy tính/công nghệ thì sau này có tự dùng được không?",
+      a: "Hoàn toàn yên tâm bạn nhé! Giao diện quản trị của WebX được thiết kế 100% bằng tiếng Việt cực kỳ trực quan và thân thiện. Bạn chỉ cần vài thao tác chạm trên điện thoại là có thể tự đổi giá, cập nhật món mới hoặc đổi hình ảnh chỉ trong 30 giây. Khi bàn giao, WebX sẽ gửi kèm video hướng dẫn cầm tay chỉ việc 1:1 và đồng hành hỗ trợ cho đến khi bạn tự làm thành thạo."
+    },
+    {
+      q: "Làm website trọn gói xong có phải đóng thêm phí duy trì hàng tháng không?",
+      a: "Hoàn toàn KHÔNG! WebX cam kết triết lý: 'Thanh toán 1 lần — Sở hữu trọn đời'. Bạn không phải lo lắng về việc trả phí thuê nền tảng hàng tháng hay hàng năm như các bên khác. Toàn bộ mã nguồn website, hình ảnh và dữ liệu khách hàng đều thuộc quyền sở hữu vĩnh viễn của riêng quán bạn."
+    },
+    {
+      q: "Thời gian làm website mất bao lâu? Quán sắp khai trương cần gấp có kịp không?",
+      a: "Thời gian bàn giao tiêu chuẩn chỉ từ 2 đến 3 ngày làm việc là website đã hoàn thiện chỉn chu và chạy thực tế. Nếu quán của bạn chuẩn bị khai trương hoặc cần website gấp để chạy chương trình khuyến mãi, WebX có quy trình hỗ trợ hỏa tốc trong 24h - 48h để kịp tiến độ đón khách."
+    },
+    {
+      q: "Quán chưa có hình ảnh đẹp hoặc menu hoàn chỉnh thì có làm web được không?",
+      a: "Hoàn toàn được! Bạn chỉ cần gửi ảnh chụp món ăn/không gian thực tế bằng điện thoại hoặc danh sách món viết tay. Đội ngũ WebX sẽ hỗ trợ chỉnh sửa màu sắc hình ảnh sáng đẹp, chuẩn tỉ lệ, căn chỉnh bảng giá và sắp xếp bố cục thực đơn chuyên nghiệp nhất cho bạn."
+    },
+    {
+      q: "Có cần phải đặt cọc tiền trước không?",
+      a: "Không cần đặt cọc trước bạn nhé! Để đảm bảo sự an tâm tuyệt đối, WebX sẽ dựng giao diện demo thực tế dựa trên phong cách và màu sắc riêng của quán để bạn trải nghiệm trước. Khi bạn hài lòng 100% và duyệt demo, chúng mình mới tiến hành gắn tên miền chính thức và nhận thanh toán."
+    },
+    {
+      q: "Website có chuẩn trên điện thoại và có nút gọi điện, nhắn Zalo liền không?",
+      a: "100% tối ưu mượt mà trên mọi dòng smartphone! Hơn 85% khách hàng tra cứu thông tin quán trên điện thoại, nên WebX luôn tích hợp sẵn thanh nút nổi thông minh: Gọi điện thoại 1 chạm, Nhắn Zalo tư vấn ngay, Chỉ đường Google Maps và Xem menu ảnh to rõ nét."
+    },
+    {
+      q: "Khi khách đặt bàn, đặt món hoặc để lại số điện thoại thì đơn báo về đâu?",
+      a: "Thông tin sẽ được thông báo tức thì về Zalo cá nhân hoặc Email của bạn! Chuông điện thoại sẽ báo ngay khi khách gửi yêu cầu đặt bàn hoặc đơn hàng, giúp bạn phản hồi khách ngay lập tức mà không bao giờ sợ sót đơn."
+    },
+    {
+      q: "Sau khi bàn giao, nếu muốn sửa thêm món hoặc gặp trục trặc thì ai hỗ trợ?",
+      a: "WebX bảo hành và hỗ trợ kỹ thuật trọn đời! Bất cứ khi nào bạn cần hỗ trợ, chỉ cần nhắn tin qua Zalo 0325 477 523 (gặp Long), đội ngũ sẽ hỗ trợ chỉnh sửa nội dung hoặc xử lý kỹ thuật nhanh chóng trong ngày hoàn toàn miễn phí."
+    },
+    {
+      q: "Website có giúp quán tìm kiếm khách hàng mới trên Google không?",
+      a: "Có! Tất cả website tại WebX đều được tối ưu chuẩn SEO địa phương (Local SEO) và tích hợp liên kết vị trí Google Maps chính xác. Khi khách hàng ở gần gõ tìm kiếm quán ăn/cà phê/dịch vụ tại khu vực của bạn trên Google, quán của bạn sẽ dễ dàng hiển thị lên trang nhất."
+    },
+    {
+      q: "Quán của tôi có thể tích hợp mã QR thanh toán ngân hàng tự động không?",
+      a: "Có sẵn luôn! WebX tích hợp sẵn mã VietQR động theo chuẩn ngân hàng Việt Nam. Khách chỉ cần quét mã QR bằng ứng dụng ngân hàng là số tiền và nội dung chuyển khoản tự điền chính xác, không sợ khách chuyển nhầm số tài khoản."
+    }
+  ],
+
   /* --- Cơ sở tri thức cho Chatbot tư vấn 24/7 --- */
   chatbotKB: [
     {
